@@ -28,7 +28,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-base font-semibold text-default-600">New Products</p>
-                        {{-- <h4 class="text-2xl font-semibold text-default-900 mt-4">201K</h4> --}}
+                        <h4 class="text-2xl font-semibold text-default-900 mt-4">{{ $newProduct }}</h4>
                     </div>
                     <span
                         class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-primary/20 text-primary">
@@ -42,7 +42,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-base font-semibold text-default-600">Upcoming Products</p>
-                        {{-- <h4 class="text-2xl font-semibold text-default-900 mt-4">44K</h4> --}}
+                        <h4 class="text-2xl font-semibold text-default-900 mt-4">44K</h4>
                     </div>
                     <span
                         class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-amber-500/20 text-amber-500">

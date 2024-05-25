@@ -1,26 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\querybuilder;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class barangController extends Controller
 {
 
+
     public function index(Request $request)
     {
         $search = $request->query('search');
         $kategori = $request->query('kategori');
+        $sevenDaysAgo = Carbon::now()->subDays(7)->toDateString();
 
         $query = DB::table('tbbarang')
             ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
             ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
             ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori');
-
         if ($search) {
             $query->where(function ($query) use ($search) {
                 $query->where('tbbarang.kode', 'LIKE', '%' . $search . '%')
@@ -34,15 +36,20 @@ class barangController extends Controller
         }
 
         $barang = $query->simplePaginate(3);
+        // $totalProducts = $query->count();
         $page = $barang->currentPage();
-
-        $totalProducts = $query->count();
+        
+        $newProduct = DB::table('tbbarang')
+        ->where('created_at', '>=', $sevenDaysAgo)
+        ->count();
 
         $kategori = DB::table('tbkategori')->get();
+        $totalProducts = DB::table('tbbarang')->count();
 
         return view('admin.barang.admin-list')
             ->with('barang', $barang)
             ->with('page', $page)
+            ->with('newProduct', $newProduct)
             ->with('kategori', $kategori)
             ->with('totalProducts', $totalProducts)
             ->with('title', 'Product - List');
@@ -110,8 +117,8 @@ class barangController extends Controller
             'desc' => $request->desc,
             'pajang' => $request->pajang,
             'foto' => implode(',', $gambarPaths),
-            // 'created_at' => $now,
-            // 'updated_at' => $now,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         Alert::success('Success', 'Data Berhasil Ditambah');
@@ -202,6 +209,8 @@ class barangController extends Controller
             'desc' => $request->desc,
             'pajang' => $request->pajang,
             'foto' => implode(',', $gambarPaths),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         Alert::success('Success', 'Data Berhasil Diperbarui');

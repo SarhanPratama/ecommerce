@@ -722,6 +722,7 @@
 
           <div class="hs-dropdown-menu z-10 mt-4 hidden min-w-[200px] overflow-hidden rounded-lg border border-default-100 bg-white pb-1.5 opacity-0 shadow transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:bg-default-50">
             <ul class="flex flex-col gap-1">
+              @if (auth()->check())
               <li class="border-b border-dashed border-default-200 bg-primary/10 p-4">
                 <a href="" class="flex items-center gap-4">
                   <div class="relative">
@@ -731,11 +732,18 @@
                     <span class="absolute end-0 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-default-50"></span>
                   </div>
                   <div>
-                    <h6 class="text-base text-primary">Paula Keenan</h6>
+                    <h6 class="text-base text-primary">{{ auth()->user()->name }}</h6>
                     <small class="text-primary/80">User</small>
                   </div>
                 </a>
               </li>
+              @else
+              <div class="text-center">
+
+                <a href="{{ url('login') }}"
+                class="py-2.5 px-10 inline-flex rounded-lg text-sm font-medium bg-primary text-white transition-all hover:bg-primary-500">Login</a>
+              </div>
+              @endif
               <li class="px-1.5">
                 <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700" href=""><i class="ti ti-user-circle me-2 text-lg"></i> My Account</a>
               </li>
@@ -744,7 +752,7 @@
                   Seller</a>
               </li>
               <li class="px-1.5">
-                <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700" href=""><i class="ti ti-shopping-cart me-2 text-lg"></i> Cart</a>
+                <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700" href="{{ url('cart') }}"><i class="ti ti-shopping-cart me-2 text-lg"></i> Cart</a>
               </li>
               <li class="px-1.5">
                 <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-red-500/10 hover:text-red-500" href="{{ url('logout') }}"><i class="ti ti-logout-2 me-2 text-lg"></i> Log Out</a>
@@ -758,11 +766,11 @@
 </header>
 
 <!-- Navbar -->
-{{-- <div class="mt-16">
+<div class="mt-16">
   <div class="hidden h-16 items-center border-b border-default-100 bg-white dark:bg-default-50 lg:flex">
     <div class="container">
       <div class="flex items-center gap-4 whitespace-nowrap">
-        <div class="hs-dropdown flex [--trigger:hover]">
+        {{-- <div class="hs-dropdown flex [--trigger:hover]">
           <a href="#" class="hs-dropdown-toggle relative flex items-center gap-2 rounded-md bg-primary/10 px-4 py-2.5 text-base font-semibold text-primary transition-all duration-300 after:absolute after:inset-x-0 after:-bottom-3 after:top-0 hover:bg-primary hover:text-white">
             <i class="ti ti-layout-grid text-xl/none"></i>
             <span>Browse All Categories</span>
@@ -791,9 +799,9 @@
                 <i class="ti ti-chevron-right ms-auto"></i></a>
             </div>
           </div>
-        </div>
+        </div> --}}
 
-        <div class="group relative">
+        {{-- <div class="group relative">
           <select id="all-select-categories" data-hs-select='{
                             "placeholder": "Select Country",
                             "toggleTag": "<button type=\"button\"></button>",
@@ -827,17 +835,17 @@
           <div class="absolute -inset-y-0 end-3 start-auto flex items-center text-primary group-hover:text-white">
             <i class="ti ti-chevron-down shrink text-base/none"></i>
           </div>
-        </div>
+        </div> --}}
         <!-- End Select -->
 
-        <form class="relative mx-auto flex min-w-80">
-          <input id="data-input" type="search" placeholder="Search for items..." class="w-full rounded-lg border-none bg-default-100 py-3 pe-6 ps-12 text-sm text-default-900 transition placeholder:text-default-600 focus:outline-none focus:ring-transparent" />
+        <form  action="{{ url('ecom') }}" method="GET"  class="relative mx-auto flex min-w-80">
+          <input id="data-input" type="search" name="search" value="{{ request('search') }}" placeholder="Search for items..." class="w-full rounded-lg border-none bg-default-100 py-3 pe-6 ps-12 text-sm text-default-900 transition placeholder:text-default-600 focus:outline-none focus:ring-transparent" />
           <button type="button" aria-label="Click here to search input data" class="absolute inset-y-0 start-2 z-10 flex h-full w-10 shrink-0 cursor-default items-center justify-center focus:outline-none">
             <i data-lucide="search" class="h-5 w-5"></i>
           </button>
         </form>
 
-        <div class="flex">
+        {{-- <div class="flex">
           <a href="tel:+XXXXXXXX" class="flex items-center gap-2">
             <i class="ti ti-headset text-4xl text-default-600"></i>
             <div>
@@ -847,11 +855,11 @@
               </p>
             </div>
           </a>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
-</div> --}}
+</div>
 
 <!-- Mobile Sidebar Menu -->
 <div id="mobile-menu" class="hs-overlay fixed left-0 top-0 z-60 hidden h-full w-full max-w-[270px] -translate-x-full transform border-e border-e-default-200 bg-white transition-all hs-overlay-open:translate-x-0 dark:bg-default-50" tabindex="-1">

@@ -18,24 +18,28 @@
                 </div><!-- end flex -->
                 <div class="flex flex-col gap-6">
 
-                    @if(session('cart'))
-                    @foreach(session('cart') as $id => $detail)
-                    <div id="{{ $id }}" class="border border-default-200 rounded-lg hover:border-primary duration-500">
+                    @foreach($cartItems as $item)
+                    <div class="border border-default-200 rounded-lg hover:border-primary duration-500">
                         <div class="p-6">
                             <div class="flex flex-col md:flex-row gap-4">
                                 <div class="flex-shrink">
-                                    <img alt="" class="h-40 w-40" src="{{ url('storage/'. $detail['foto']) }}">
+                                    @if ($item->foto)
+                                    @php
+                                    $gambarPaths = explode(',', $item->foto);
+                                    $gambar = $gambarPaths[0];
+                                    @endphp
+                                    <img class="h-40 w-40" src="{{ asset('storage/' . $gambar) }}" alt="Foto Barang">
+                                    @endif
                                 </div>
                                 <div class="flex-grow flex">
                                     <div class="flex-grow flex flex-col">
                                         <div class="shrink mb-2">
                                             <p class="text-primary uppercase text-xs font-medium mb-0.5">{{
-                                                $detail['kategori'] }}</p>
-                                            <h3 class="text-default-800 text-2xl font-semibold">{{ $detail['nama']
-                                                }} <small class="text-sm text-default-600">x{{ $detail['quantity'] }}{{
-                                                    $detail['satuan'] }}</small></h3>
+                                                $item->namaKategori }}</p>
+                                            <h3 class="text-default-800 text-2xl font-semibold">{{ $item->nama
+                                                }} <small class="text-sm text-default-600">x{{ $item->sawal }}</small></h3>
                                             <h5 class="font-semibold text-primary">Rp. {{
-                                                number_format($detail['hj'], 0, ',', '.') }}</h5>
+                                                number_format($item->hj, 0, ',', '.') }}</h5>
                                         </div>
                                         <div class="grow flex items-center gap-4">
                                             <div class="flex gap-1.5">
@@ -58,7 +62,7 @@
                                                 <input type="text"
                                                     class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
                                                     value="1" data-hs-input-number-input=""
-                                                    data-unit-price="{{ $detail['hj'] }}">
+                                                    data-unit-price="">
                                                 <button
                                                     class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
                                                     type="button" data-hs-input-number-increment="">
@@ -67,11 +71,11 @@
                                             </div>
                                             <div
                                                 class="h-10 w-10 inline-flex items-center justify-center bg-transparent transition-all cursor-pointer rounded-full hover:bg-red-500/20">
-                                                <form action="{{ route('delete.cart.product') }}" method="POST"
+                                                <form action="{{ route('delete.cart.product', $item->idbarang) }}" method="POST"
                                                     data-confirm-delete="true">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <input type="hidden" name="id" value="{{ $id }}">
+                                                    
                                                     <button type="submit">
                                                         <i class="h-5 w-5 stroke-red-500" data-lucide="trash"></i>
                                                     </button>
@@ -84,7 +88,7 @@
                                             data-lucide="heart"></i>
                                         <div class="mt-auto">
                                             <h5 class="text-lg font-medium text-default-800">Rp. {{
-                                                $detail['totalHarga'] }}
+                                                $item->qty * $item->hj }}
                                             </h5>
                                             <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p>
                                         </div>
@@ -93,11 +97,7 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     @endforeach
-                    @endif
                     <div class="flex justify-end gap-2">
                         <a class="rounded-md border border-primary px-6 py-2.5 text-center text-sm font-medium text-primary shadow-sm transition-all hover:text-white hover:bg-primary"
                             href="{{ url('') }}">Go To Back</a>

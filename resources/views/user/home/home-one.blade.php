@@ -80,8 +80,6 @@
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6 mt-5">
             @foreach ($barang as $item)
-
-
             <div
                 class="border border-default-200 rounded-xl overflow-hidden duration-500 hover:border-primary relative">
                 <div class="p-4">
