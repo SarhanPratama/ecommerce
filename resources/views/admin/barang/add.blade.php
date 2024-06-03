@@ -84,7 +84,7 @@
 
                                 <div class="grid lg:grid-cols-2 gap-6">
                                     <div>
-                                        <input name="hb"
+                                        <input name="hb" onkeyup="formatInput(this)"
                                             class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                             type="text" placeholder="Cost Price">
                                             @error('idsatuan')
@@ -93,7 +93,7 @@
                                     </div>
                                     <div>
 
-                                        <input name="hj"
+                                        <input name="hj" onkeyup="formatInput(this)"
                                             class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                             type="text" placeholder="Selling Price">
                                             @error('idsatuan')
@@ -148,6 +148,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    function formatRupiah(angka, prefix){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split        = number_string.split(','),
+            sisa          = split[0].length % 3,
+            rupiah          = split[0].substr(0, sisa),
+            ribuan          = split[0].substr(sisa).match(/\d{3}/gi);
+
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+    }
+
+    function formatInput(input){
+        var formatted = formatRupiah(input.value, 'Rp ');
+        input.value = formatted;
+    }
+</script>
 
 @endsection
 

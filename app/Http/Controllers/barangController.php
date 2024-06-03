@@ -127,7 +127,6 @@ class barangController extends Controller
 
     public function show(int $id)
     {
-
         $barang = DB::table('tbbarang')
             ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
             ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')

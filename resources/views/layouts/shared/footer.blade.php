@@ -10,7 +10,6 @@
               <img src="/images/logo.png" class="hidden h-10 dark:block" alt="" />
               <img src="/images/logo-dark.png" class="block h-10 dark:hidden" alt="" />
             </a>
-
             <p class="mt-6 max-w-xs text-base font-medium text-default-600">
               A supermarket is a self-service shop offering a wide variety of
               food, beverages & household products.

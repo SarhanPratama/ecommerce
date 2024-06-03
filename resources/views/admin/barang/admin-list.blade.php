@@ -72,13 +72,13 @@
     <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
         <div class="flex flex-wrap items-center justify-between py-4 px-5">
 
-            <form action="{{ route('product.index') }}" method="GET" >
+            <form action="{{ route('product.index') }}" method="GET">
                 <div class="relative">
                     <select name="kategori" onchange="this.form.submit()"
                         class="block w-40 py-2.5 px-4 bg-default-50/0 text-default-600 border-default-200 rounded-lg text-sm focus:border-primary focus:ring-primary">
                         <option value="">All Categories</option>
                         @foreach($kategori as $kat)
-                        <option value="{{ $kat->id }}" {{ request('kategori') == $kat->id ? 'selected' : '' }}>
+                        <option value="{{ $kat->id }}" {{ request('kategori')==$kat->id ? 'selected' : '' }}>
                             {{ $kat->nama }}
                         </option>
                         @endforeach
@@ -86,14 +86,14 @@
                 </div>
             </form>
             <div class="relative lg:flex hidden">
-                <form action="{{ route('product.index') }}" method="GET" >
+                <form action="{{ route('product.index') }}" method="GET">
                     <input type="search" name="search" value="{{ request('search') }}"
                         class="ps-12 pe-4 py-2.5 block w-64 bg-default-50/0 text-default-600 border-default-200 rounded-lg text-sm focus:border-primary focus:ring-primary"
                         placeholder="Search...">
                     <span class="absolute start-4 top-2.5">
                         <i class="ti ti-search text-lg/none"></i>
                     </span>
-                    
+
                 </form>
             </div>
             <a href="{{ url('admin/product/create') }}"
@@ -145,7 +145,8 @@
                     <tr>
                         <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ ($page - 1) *
                             $barang->perPage() + $loop->iteration }}</td>
-                        {{-- <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->kode }}</td> --}}
+                        {{-- <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->kode }}</td>
+                        --}}
                         <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
                             <spam class="flex items-center gap-2">
                                 <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">
@@ -162,9 +163,8 @@
                         </td>
                         <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->kategori }}
                         </td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Rp. {{
-                            number_format($item->hb, 0, ',', '.')
-                            }}</td>
+                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Rp.
+                            {{number_format($item->hb, 0, ',', '.')}}</td>
                         <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Rp. {{
                             number_format($item->hj, 0, ',', '.') }}</td>
                         <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $item->sawal }}

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -64,12 +65,14 @@ class userController extends Controller
             ->select('tbkategori.id', 'tbkategori.nama', DB::raw('COUNT(tbbarang.id) as count'))
             ->groupBy('tbkategori.id', 'tbkategori.nama')
             ->get();
+
         $products = DB::table('tbbarang')
             ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
             ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
             ->where('tbkategori.id', $id)
             ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
             ->get();
+
         // dd($products);
         return view('user/layouts/kategori')
             ->with('kategori', $kategori)
@@ -80,12 +83,12 @@ class userController extends Controller
     {
         $idpelanggan = auth()->user()->id;
         $iduser = auth()->user()->id;
-
         $cartItems = DB::table('tbkeranjang')
             ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbkeranjang.idbarang')
             ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
             ->leftJoin('tbpelanggan', 'tbpelanggan.id', '=', 'tbkeranjang.idpelanggan')
-            ->select('tbkeranjang.*', 'tbbarang.*', 'tbpelanggan.nama as namaPelanggan', 'tbkategori.nama as namaKategori')
+            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
+            ->select('tbkeranjang.*', 'tbbarang.*', 'tbpelanggan.nama as namaPelanggan', 'tbkategori.nama as namaKategori', 'tbsatuan.nama as namaSatuan')
             ->where('tbkeranjang.idpelanggan', $idpelanggan)
             ->where('tbkeranjang.iduser', $iduser)
             ->get();
@@ -94,19 +97,12 @@ class userController extends Controller
             ->with('cartItems', $cartItems);
     }
 
-    public function addToCart(Request $request, $id)
+    public function addToCart($id)
     {
-        $barang = DB::table('tbbarang')
-            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
-            ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
-            ->where('tbbarang.id', $id)
-            ->first();
-
-        $idpelanggan = auth()->user()->id; // Pastikan ID pelanggan dikirim dalam request
+        $idpelanggan = auth()->user()->id;
         $iduser = auth()->user()->id;
 
-        // Periksa apakah barang sudah ada di keranjang
+
         $existingCart = DB::table('tbkeranjang')
             ->where('idpelanggan', $idpelanggan)
             ->where('idbarang', $id)
@@ -126,46 +122,9 @@ class userController extends Controller
                 'tgl' => now(),
             ]);
         }
-
         Alert::success('Success', 'Product Berhasil Ditambah ke keranjang');
         return redirect()->back();
     }
-
-    // public function addToCart($id)
-    // {
-    //     $barang = DB::table('tbbarang')
-    //         ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
-    //         ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-    //         ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
-    //         ->where('tbbarang.id', $id)
-    //         ->first();
-
-    //     // $quantity = $request->input('quantity', 1);
-
-    //     $cart = session()->get('cart', []);
-
-    //     // Periksa apakah barang sudah ada di keranjang
-    //     if (isset($cart[$id])) {
-    //         $cart[$id]['quantity']++;
-    //         $cart[$id]['totalHarga'] = $cart[$id]['quantity'] * $cart[$id]['hj'];
-    //     } else {
-    //         $foto = explode(',', $barang->foto)[0];
-    //         $cart[$id] = [
-    //             "nama" => $barang->nama,
-    //             "quantity" => 1,
-    //             "kategori" => $barang->kategori,
-    //             "satuan" => $barang->satuan,
-    //             "stok" => $barang->sawal,
-    //             "hj" => $barang->hj,
-    //             "totalHarga" => $barang->hj,
-    //             "foto" => $foto,
-    //         ];
-    //     }
-
-    //     session()->put('cart', $cart);
-    //     Alert::success('Success', 'Product Berhasil Ditambah ke keranjang');
-    //     return redirect()->back();
-    // }
 
     public function deleteCart($id)
     {

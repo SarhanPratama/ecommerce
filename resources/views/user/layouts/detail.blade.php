@@ -126,7 +126,7 @@
                                 class="h-10 w-10 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-xl text-white group-hover:bg-white/20 transition-all duration-300">
                                 <i class="ti ti-shopping-bag text-xl"></i>
                             </span>
-                            <span class="text-base font-semibold">Add To Cart</span>
+                            <a href="{{ url('addToCart/'. $barang->id) }}" class="text-base font-semibold">Add To Cart</a>
                         </button>
                         <button type="button"
                             class="p-1 pe-4 flex items-center justify-center gap-2 rounded-2xl border border-b-2 border-primary-600 text-white bg-primary-600 backdrop-blur-xl hover:text-white hover:border-primary-700 hover:bg-primary-700 drop-shadow-lg transition-all duration-300 group">

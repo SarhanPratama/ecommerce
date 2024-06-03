@@ -37,7 +37,8 @@
                                             <p class="text-primary uppercase text-xs font-medium mb-0.5">{{
                                                 $item->namaKategori }}</p>
                                             <h3 class="text-default-800 text-2xl font-semibold">{{ $item->nama
-                                                }} <small class="text-sm text-default-600">x{{ $item->sawal }}</small></h3>
+                                                }} <small class="text-sm text-default-600">x{{ $item->sawal }} {{
+                                                    $item->namaSatuan }}</small></h3>
                                             <h5 class="font-semibold text-primary">Rp. {{
                                                 number_format($item->hj, 0, ',', '.') }}</h5>
                                         </div>
@@ -59,10 +60,9 @@
                                                     type="button" data-hs-input-number-decrement="">
                                                     <i class="ti ti-minus"></i>
                                                 </button>
-                                                <input type="text"
+                                                <input ttype="text"
                                                     class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
-                                                    value="1" data-hs-input-number-input=""
-                                                    data-unit-price="">
+                                                    value="6" data-hs-input-number-input="">
                                                 <button
                                                     class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
                                                     type="button" data-hs-input-number-increment="">
@@ -71,16 +71,17 @@
                                             </div>
                                             <div
                                                 class="h-10 w-10 inline-flex items-center justify-center bg-transparent transition-all cursor-pointer rounded-full hover:bg-red-500/20">
-                                                <form action="{{ route('delete.cart.product', $item->idbarang) }}" method="POST"
-                                                    data-confirm-delete="true">
+                                                <form action="{{ route('delete.cart.product', $item->idbarang) }}"
+                                                    method="POST" data-confirm-delete="true">
                                                     @csrf
                                                     @method('DELETE')
-                                                    
+
                                                     <button type="submit">
                                                         <i class="h-5 w-5 stroke-red-500" data-lucide="trash"></i>
                                                     </button>
                                                 </form>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="text-end flex flex-col justify-between">
