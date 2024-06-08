@@ -171,7 +171,7 @@ class barangController extends Controller
             'hb' => 'required',
             'hj' => 'required',
             'desc' => 'required',
-            'pajang' => 'required',
+            'status' => 'required',
             'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -206,7 +206,7 @@ class barangController extends Controller
             'hb' => $request->hb,
             'hj' => $request->hj,
             'desc' => $request->desc,
-            'pajang' => $request->pajang,
+            'status' => $request->status,
             'foto' => implode(',', $gambarPaths),
             'created_at' => now(),
             'updated_at' => now(),

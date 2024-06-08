@@ -134,7 +134,7 @@
                             Unit</th> --}}
                         <th scope="col"
                             class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
-                            Pajang</th>
+                            Status</th>
                         <th scope="col"
                             class="px-3 py-3 text-center text-base capitalize font-semibold text-default-900 min-w-32">
                             Action</th>
@@ -174,9 +174,15 @@
                         {{-- <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">{{ $item->satuan->nama}}
                         </td> --}}
                         <td class="px-6 py-3 text-primary font-medium whitespace-nowrap">
+                            @if($item->status == 1)
                             <span class="px-3 py-1 text-xs font-medium rounded-md bg-primary/20 text-primary">
-                                {{ $item->pajang ? 'Yes' : 'NO' }}
+                                Publish
                             </span>
+                            @else
+                            <span class="px-3 py-1 text-xs font-medium rounded-md bg-yellow-500/20 text-yellow-500">
+                                Pending
+                            </span>
+                            @endif
                         </td>
                         <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                             <div class="flex items-center justify-center gap-2">

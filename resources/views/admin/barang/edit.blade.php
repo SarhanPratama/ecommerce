@@ -96,15 +96,15 @@
                                         type="number" placeholder="Quantity in Stock">
                                 </div>
                                 <div>
-                                    <select name="pajang" id="all-select-categories" data-hs-select='{
+                                    <select name="status" id="all-select-categories" data-hs-select='{
                                         "placeholder": "Select Type",
                                         "toggleTag": "<button type=\"button\"></button>",
                                         "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 form-input block w-full rounded-md py-2.5 ps-4 pe-10 text-default-800 text-start text-sm focus:ring-transparent border-default-200 overflow-hidden focus:border-primary dark:bg-default-50 before:absolute before:inset-0 before:z-[1]",
                                         }'
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50">
-                                        <option value="" selected disabled>Pajang</option>
-                                        <option value="1" {{ $barang->pajang == 1 ? 'selected' : '' }}>Ya</option>
-                                        <option value="0" {{ $barang->pajang == 0 ? 'selected' : '' }}>No</option>
+                                        <option value="" selected disabled>Status</option>
+                                        <option value="1" {{ $barang->status == 1 ? 'selected' : '' }}>Publish</option>
+                                        <option value="0" {{ $barang->status == 0 ? 'selected' : '' }}>Pending</option>
 
                                     </select>
                                 </div>

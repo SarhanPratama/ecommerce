@@ -11,22 +11,14 @@ class userController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('search');
-        $query = DB::table('tbbarang')
+        $barang = DB::table('tbbarang')
             ->leftjoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->select('tbbarang.*', 'tbkategori.nama as kategori');
-        if ($search) {
-            $query->where(function ($query) use ($search) {
-                $query->where('tbbarang.kode', 'LIKE', '%' . $search . '%')
-                    ->orWhere('tbbarang.nama', 'LIKE', '%' . $search . '%')
-                    ->orWhere('tbkategori.nama', 'LIKE', '%' . $search . '%');
-            });
-        }
-        $barang = $query->get();
-
-        $kategori = DB::table('tbkategori')->get();
+            ->select('tbbarang.*', 'tbkategori.nama as kategori')
+            ->where('tbbarang.status', 1)
+            ->get();
         // dd($barang);
 
+        $kategori = DB::table('tbkategori')->get();
         return view('user/home/home-one')
             ->with('barang', $barang)
             ->with('kategori', $kategori);
@@ -79,46 +71,44 @@ class userController extends Controller
             ->with('products', $products);
     }
 
+    public function contact()
+    {
+        return view('user.layouts.contact');
+    }
+
     public function cart()
     {
-        $idpelanggan = auth()->user()->id;
-        $iduser = auth()->user()->id;
-        $cartItems = DB::table('tbkeranjang')
-            ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbkeranjang.idbarang')
-            ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->leftJoin('tbpelanggan', 'tbpelanggan.id', '=', 'tbkeranjang.idpelanggan')
-            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
-            ->select('tbkeranjang.*', 'tbbarang.*', 'tbpelanggan.nama as namaPelanggan', 'tbkategori.nama as namaKategori', 'tbsatuan.nama as namaSatuan')
-            ->where('tbkeranjang.idpelanggan', $idpelanggan)
-            ->where('tbkeranjang.iduser', $iduser)
-            ->get();
-
-        return view('user.layouts.cart')
-            ->with('cartItems', $cartItems);
+        return view('user.layouts.cart');
     }
 
     public function addToCart($id)
     {
-        $idpelanggan = auth()->user()->id;
-        $iduser = auth()->user()->id;
 
+        $idpelanggan = auth()->user()->id;
+        $barang = DB::table('tbbarang')->where('id', $id)->first();
 
         $existingCart = DB::table('tbkeranjang')
-            ->where('idpelanggan', $idpelanggan)
-            ->where('idbarang', $id)
-            ->where('iduser', $iduser)
+            ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbkeranjang.idbarang')
+            ->select('tbkeranjang.*', 'tbbarang.hj as hargajual')
+            ->where('tbkeranjang.idpelanggan', $idpelanggan)
+            ->where('tbkeranjang.idbarang', $id)
             ->first();
 
         if ($existingCart) {
+            // Update qty dan harga total
             DB::table('tbkeranjang')
                 ->where('id', $existingCart->id)
-                ->increment('qty', 1);
+                ->update([
+                    'qty' => $existingCart->qty + 1,
+                    'harga' => ($existingCart->qty + 1) * $barang->hj,
+                ]);
         } else {
+            // Insert item baru ke keranjang
             DB::table('tbkeranjang')->insert([
                 'idpelanggan' => $idpelanggan,
                 'idbarang' => $id,
-                'iduser' => $iduser,
                 'qty' => 1,
+                'harga' => $barang->hj,
                 'tgl' => now(),
             ]);
         }
@@ -129,12 +119,10 @@ class userController extends Controller
     public function deleteCart($id)
     {
         $idpelanggan = auth()->user()->id;
-        $iduser = auth()->user()->id;
 
         DB::table('tbkeranjang')
             ->where('idpelanggan', $idpelanggan)
             ->where('idbarang', $id)
-            ->where('iduser', $iduser)
             ->delete();
 
         Alert::success('Success', 'Product Berhasil Dihapus dari keranjang');

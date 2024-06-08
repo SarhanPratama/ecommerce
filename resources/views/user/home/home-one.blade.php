@@ -7,7 +7,6 @@
 @include('layouts.shared/mobile-nav')
 
 
-
 <section class="md:bg-right-bottom bg-cover bg-[url(/images/other/hero.png)]">
     <div class="container">
         <div class="max-w-3xl py-20 lg:py-40">

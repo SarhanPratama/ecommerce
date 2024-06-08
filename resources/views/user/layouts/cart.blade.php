@@ -62,7 +62,7 @@
                                                 </button>
                                                 <input ttype="text"
                                                     class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
-                                                    value="6" data-hs-input-number-input="">
+                                                    value="{{ $item->qty }}" data-hs-input-number-input="">
                                                 <button
                                                     class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
                                                     type="button" data-hs-input-number-increment="">
@@ -88,8 +88,7 @@
                                         <i class="h-6 w-6 ms-auto text-default-800 hover:fill-red-500 hover:stroke-red-500"
                                             data-lucide="heart"></i>
                                         <div class="mt-auto">
-                                            <h5 class="text-lg font-medium text-default-800">Rp. {{
-                                                $item->qty * $item->hj }}
+                                            <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}
                                             </h5>
                                             <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p>
                                         </div>
@@ -103,7 +102,7 @@
                         <a class="rounded-md border border-primary px-6 py-2.5 text-center text-sm font-medium text-primary shadow-sm transition-all hover:text-white hover:bg-primary"
                             href="{{ url('') }}">Go To Back</a>
                         <a class="rounded-md border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600 hover:border-primary-600"
-                            href="">Checkout</a>
+                            href="{{ url('checkout') }}">Checkout</a>
                     </div>
                 </div>
 
@@ -138,7 +137,7 @@
                         </div>
                         <div class="flex items-center justify-between p-4">
                             <p class="text-base font-medium text-default-800">Order Total :</p>
-                            <h5 class="text-lg font-semibold text-default-800">$605.00</h5>
+                            <h5 class="text-lg font-semibold text-default-800">Rp. {{ number_format($totalHarga, 0, ',', '.') }}</h5>
                         </div>
                         <div class="p-4">
                             <a class="flex items-center justify-center w-full px-6 py-2.5 rounded-md text-base bg-primary text-white transition-all font-medium hover:bg-primary-600"
