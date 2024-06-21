@@ -88,9 +88,8 @@
                                         <i class="h-6 w-6 ms-auto text-default-800 hover:fill-red-500 hover:stroke-red-500"
                                             data-lucide="heart"></i>
                                         <div class="mt-auto">
-                                            <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}
-                                            </h5>
-                                            <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p>
+                                            <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h5>
+                                            {{-- <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -113,21 +112,21 @@
                 <div class="border border-default-200 rounded-lg">
                     <div class="divide-y divide-default-200">
                         <div class="flex items-center justify-between p-4">
-                            <p class="text-base text-default-600">Total :</p>
-                            <h5 class="text-lg font-medium text-default-800">$750.00</h5>
+                            <p class="text-base text-default-600">Sub Total :</p>
+                            <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($totalHarga, 0, ',', '.') }}</h5>
                         </div>
-                        <div class="flex items-center justify-between p-4">
+                        {{-- <div class="flex items-center justify-between p-4">
                             <p class="text-base text-default-600">Total Discount :</p>
                             <h5 class="text-lg font-medium text-default-800">$24.00</h5>
-                        </div>
-                        <div class="flex items-center justify-between p-4">
+                        </div> --}}
+                        {{-- <div class="flex items-center justify-between p-4">
                             <p class="text-base text-default-600">Estimated GST/CST :</p>
                             <h5 class="text-lg font-medium text-default-800">$56.00</h5>
-                        </div>
-                        <div class="flex items-center justify-between p-4">
+                        </div> --}}
+                        {{-- <div class="flex items-center justify-between p-4">
                             <p class="text-base font-medium text-default-600">Coupon Discount :</p>
                             <button class="text-sm font-medium text-white bg-primary px-3 py-1 rounded ">Apply</button>
-                        </div>
+                        </div> --}}
                         <div class="p-4">
                             <div class="flex items-center justify-between">
                                 <p class="text-base text-default-600">Delivery :</p>

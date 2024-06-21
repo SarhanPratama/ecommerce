@@ -58,7 +58,7 @@
                     <h3 class="mb-4 font-semibold text-3xl text-default-800">
                         {{ $barang->nama }}
                     </h3>
-                    <p class="text-base text-default-700 mb-4">Bananas are a versatile and nutritious fruit that offers
+                    {{-- <p class="text-base text-default-700 mb-4">Bananas are a versatile and nutritious fruit that offers
                         a multitude of health benefits. Packed with essential nutrients such as potassium, vitamin C,
                         and vitamin B6, bananas contribute to overall well-being.</p>
 
@@ -71,7 +71,7 @@
                         <li>Blood Sugar Support: Low glycemic index benefits diabetes management.</li>
                         <li>Antioxidants: Dopamine and catechins combat oxidative stress.</li>
                         <li>Mood Booster: Serotonin precursors may enhance mood.</li>
-                    </ul>
+                    </ul> --}}
 
                     <div class="flex items-center gap-2 my-4">
                         <div class="flex gap-1.5">
@@ -87,11 +87,11 @@
                     <div class="my-6">
                         <h6 class="text-base text-default-800 mb-2">
                             <span>Stock : </span>
-                            <span class="text-default-400">{{ $barang->sawal }} {{ $barang->satuan }}</span>
-                        </h6>
+                            <span class="text-default-400">{{ $barang->saldoakhir }} {{ $barang->namasatuan }}</span>
+                        </h6> 
                         <h6 class="text-base text-default-800 mb-2">
                             <span>Category : </span>
-                            <span class="text-default-400">{{ $barang->kategori }}</span>
+                            <span class="text-default-400">{{ $barang->nama }}</span>
                         </h6>
                         {{-- <h6 class="text-base text-default-800">
                             <span>Tag:</span>

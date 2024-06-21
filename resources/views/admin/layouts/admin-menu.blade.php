@@ -40,15 +40,15 @@
 
       {{-- <li class="menu-item">
         <a class="flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100"
-          href="{{ route('second', ['admin', 'wallet']) }}">
+          href="">
           <i class="ti ti-wallet text-xl"></i>
           Wallet
           <span
             class="ms-auto inline-block rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-medium text-red-500">4+</span>
         </a>
-      </li>
+      </li> --}}
 
-      <li class="menu-item hs-accordion">
+      {{-- <li class="menu-item hs-accordion">
         <a href="javascript:void(0)"
           class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
           <i class="ti ti-ticket text-xl"></i>
@@ -60,21 +60,21 @@
           class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
           <ul class="mt-2 flex flex-col gap-2">
             <li class="menu-item">
-              <a href="{{ route('second', ['coupons', 'list']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Coupons List
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['coupons', 'add']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Add Coupon
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['coupons', 'edit']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Edit Coupon
@@ -82,9 +82,9 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
 
-      <li class="menu-item hs-accordion">
+      {{-- <li class="menu-item hs-accordion">
         <a href="javascript:void(0)"
           class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
           <i class="ti ti-list-check text-xl"></i>
@@ -95,14 +95,14 @@
         <div id="menuOrder" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
           <ul class="mt-2 flex flex-col gap-2">
             <li class="menu-item">
-              <a href="{{ route('second', ['order', 'list']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Orders List
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second',['order', 'details']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Order Details
@@ -124,28 +124,28 @@
           class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
           <ul class="mt-2 flex flex-col gap-2">
             <li class="menu-item">
-              <a href="{{ route('second', ['customers', 'list']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Customers List
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['customers', 'detail']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Customer Details
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['customers', 'add']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Add Customer
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['customers', 'edit']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Edit Customer
@@ -166,28 +166,28 @@
         <div id="menuShops" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
           <ul class="mt-2 flex flex-col gap-2">
             <li class="menu-item">
-              <a href="{{ route('second' , ['shops', 'list']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Shops List
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['shops', 'details']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Shop Details
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['shops', 'add']) }}"
+              <a href=""
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Add Shop
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ route('second', ['shops', 'edit']) }}"
+              <a href="{"
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
                 Edit Shop

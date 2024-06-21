@@ -10,7 +10,6 @@
 
     <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
 
-
         <div class="p-5 border-t border-dashed border-default-200">
             <form method="POST" action="{{ url('admin/product/'. $barang->id) }}" enctype="multipart/form-data" class="">
                 @csrf
@@ -27,7 +26,6 @@
                                 type="text" placeholder="Product Code" name="kode">
                         </div>
                     </div>
-
 
                     <div class="lg:col-span-2">
                         <div class="grid lg:grid-cols-2 gap-6 mb-6">

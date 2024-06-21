@@ -196,7 +196,7 @@
                         <h3 class="text-xl font-semibold text-default-800">Order Summery</h3>
                         <div class="my-6">
                             @foreach ($cartItems as $item)
-                                
+
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-4">
                                     @if ($item->foto)
@@ -206,7 +206,7 @@
                                     @endphp
                                     <img src="{{ url('storage/'. $gambar) }}" alt="" class="h-16 w-16">
                                     @endif
-                                    <a href="" class="text-base font-medium text-default-800">{{ $item->nama }} x{{ $item->qty }} {{ $item->namaKategori }}</a>
+                                    <a href="" class="text-base font-medium text-default-800">{{ $item->nama }} x{{ $item->qty }} {{ $item->namaSatuan }}</a>
                                 </div>
                                 <h3 class="text-base font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h3>
                             </div>
@@ -280,19 +280,7 @@
 
 <script>
     document.getElementById('submitAllForms').addEventListener('click', function() {
-    // Submit the first form
     document.getElementById('form1').submit();
-
-    // Add a delay to ensure the forms are submitted in sequence
-    // setTimeout(function() {
-    //     // Submit the second form
-    //     document.getElementById('form2').submit();
-    // }, 500); // Adjust the delay time as needed
-
-    // setTimeout(function() {
-    //     // Submit the third form
-    //     document.getElementById('form3').submit();
-    // }, 1000); // Adjust the delay time as needed
 });
 </script>
 

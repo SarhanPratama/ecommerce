@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        View::composer(['user.layouts.cart', 'user.layouts.checkout'], cartComposer::class);
+        View::composer(['user.layouts.cart', 'user.layouts.checkout','user.layouts.checkout-detail'], cartComposer::class);
     }
 
-    
+
 }

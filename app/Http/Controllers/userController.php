@@ -26,11 +26,10 @@ class userController extends Controller
 
     public function detailProduct(int $id)
     {
-        $barang = DB::table('tbbarang')
-            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
-            ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
-            ->where('tbbarang.id', $id)
+        $barang = DB::table('vsaldoakhir2')
+        ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbbarang.idkategori')
+            ->select('vsaldoakhir2.*', 'tbbarang.*')
+            ->where('vsaldoakhir2.id', $id)
             ->first();
         // dd($barang);
 
@@ -48,37 +47,6 @@ class userController extends Controller
         return view('user.layouts.detail', ['id' => $id, 'name' => $productName])
             ->with('barang', $barang)
             ->with('relatedProducts', $relatedProducts);
-    }
-
-    public function kategori(int $id)
-    {
-        $kategori = DB::table('tbkategori')
-            ->leftJoin('tbbarang', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->select('tbkategori.id', 'tbkategori.nama', DB::raw('COUNT(tbbarang.id) as count'))
-            ->groupBy('tbkategori.id', 'tbkategori.nama')
-            ->get();
-
-        $products = DB::table('tbbarang')
-            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
-            ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-            ->where('tbkategori.id', $id)
-            ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
-            ->get();
-
-        // dd($products);
-        return view('user/layouts/kategori')
-            ->with('kategori', $kategori)
-            ->with('products', $products);
-    }
-
-    public function contact()
-    {
-        return view('user.layouts.contact');
-    }
-
-    public function cart()
-    {
-        return view('user.layouts.cart');
     }
 
     public function addToCart($id)
@@ -116,6 +84,40 @@ class userController extends Controller
         return redirect()->back();
     }
 
+
+    public function kategori(int $id)
+    {
+        $kategori = DB::table('tbkategori')
+            ->leftJoin('tbbarang', 'tbkategori.id', '=', 'tbbarang.idkategori')
+            ->select('tbkategori.id', 'tbkategori.nama', DB::raw('COUNT(tbbarang.id) as count'))
+            ->groupBy('tbkategori.id', 'tbkategori.nama')
+            ->get();
+
+        $products = DB::table('tbbarang')
+            ->leftJoin('tbsatuan', 'tbsatuan.id', '=', 'tbbarang.idsatuan')
+            ->leftJoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
+            ->where('tbkategori.id', $id)
+            ->select('tbbarang.*', 'tbsatuan.nama as satuan', 'tbkategori.nama as kategori')
+            ->get();
+
+        // dd($products);
+        return view('user/layouts/kategori')
+            ->with('kategori', $kategori)
+            ->with('products', $products);
+    }
+
+    public function contact()
+    {
+        return view('user.layouts.contact');
+    }
+
+    public function cart()
+    {
+        return view('user.layouts.cart');
+    }
+
+
+
     public function deleteCart($id)
     {
         $idpelanggan = auth()->user()->id;
@@ -150,4 +152,15 @@ class userController extends Controller
 
         return view('user/layouts/kategori', compact('products', 'kategori'));
     }
+
+    public function invoice(){
+
+    return view('user.layouts.invoice-detail');
+    }
+
+    public function checkoutDetail(){
+
+    return view('user.layouts.checkout-detail');
+    }
+
 }

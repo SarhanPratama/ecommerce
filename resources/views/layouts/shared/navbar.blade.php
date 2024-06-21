@@ -103,8 +103,8 @@
           <div class="hs-dropdown relative inline-flex [--trigger:hover]">
             <a class="hs-dropdown-toggle inline-flex items-center rounded-full px-4 py-2 text-sm font-medium text-default-700 after:absolute after:inset-0 hover:text-primary hover:after:-bottom-10 lg:text-base"
               href="{{ url('/') }}">
-              Home 
-              
+              Home
+
               <i data-lucide="chevron-down" class="ms-2 h-4 w-4"></i>
               </a>
 
@@ -938,7 +938,7 @@
 </header>
 
 <!-- Navbar -->
-<div class="mt-16">
+{{-- <div class="mt-16">
   <div class="hidden h-16 items-center border-b border-default-100 bg-white dark:bg-default-50 lg:flex">
     <div class="container">
       <div class="flex items-center gap-4 whitespace-nowrap">
@@ -1045,7 +1045,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 <!-- Mobile Sidebar Menu -->
 <div id="mobile-menu"

@@ -45,11 +45,10 @@
                 <div class="swiper-wrapper">
 
                     @foreach ($kategori as $item)
-                        
-                    
+
+
                     <div class="swiper-slide">
-                        <div
-                            class="group border border-default-200 rounded-xl py-2 transition-all duration-500 overflow-hidden hover:border-primary">
+                        <div class="group border border-default-200 rounded-xl py-2 transition-all duration-500 overflow-hidden hover:border-primary">
                             <a href="{{ url('kategori/'. $item->id) }}" class="flex items-center justify-center py-4 gap-10 transition-all duration-500">
                                 <img src="{{ url('storage/kategori/'. $item->foto) }}" alt=""
                                     class="h-28 mx-auto transition-all duration-500 group-hover:scale-125">
@@ -110,16 +109,16 @@
                     </div>
 
                     <div class="flex items-center justify-between gap-2 mb-4">
+                        <h4 class="font-semibold text-xl text-primary">Rp. {{number_format($item->hj, 0, ',', '.') }}</h4>
+
                         <span class="flex items-center gap-2">
-                            <span
-                                class="h-5 w-5 inline-flex items-center justify-center bg-primary text-white rounded-full"><i
-                                    class="ti ti-star-filled text-sm"></i></span>
+                            <span class="h-5 w-5 inline-flex items-center justify-center bg-primary text-white rounded-full">
+                                <i class="ti ti-star-filled text-sm"></i>
+                            </span>
                             <span class="text-sm text-default-950 from-inherit">4.5</span>
                         </span>
                     </div>
-                    <div class="flex items-center justify-between gap-2">
-                        <h4 class="font-semibold text-xl text-primary">Rp. {{
-                            number_format($item->hj, 0, ',', '.') }}</h4>
+                    <div class="">
                         <a href="{{ route('addToCart', ['id' => $item->id]) }}"
                             class="shrink flex items-center justify-center rounded-lg bg-primary/20 text-primary px-6 py-2.5 text-center text-sm font-medium shadow-sm transition-all duration-200 hover:bg-primary hover:text-white relative z-10">
                             <i class="ti ti-shopping-bag text-xl me-2"></i>

@@ -53,3 +53,7 @@ Route::delete('/delete-cart-product/{id}', [UserController::class, 'deleteCart']
 Route::get('checkout', [checkoutController::class, 'checkout'])->name('checkout')->middleware('auth');
 
 Route::post('/checkout', [checkoutController::class, 'prosescheckout']);
+
+Route::get('/checkout/detail', [userController::class, 'checkoutDetail']);
+
+Route::get('/invoice', [userController::class, 'invoice']);
