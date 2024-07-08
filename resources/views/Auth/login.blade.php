@@ -25,7 +25,7 @@
             <div class="my-auto">
                 <div class="max-w-xl mx-auto">
                     <h4 class="text-default-900 text-2xl font-semibold mb-2">Login</h4>
-                    <p class="text-default-600">Glad to see you're back! Please enter your credentials to Enter</p>
+                    {{-- <p class="text-default-600">Glad to see you're back! Please enter your credentials to Enter</p> --}}
                 </div>
                 <form method="POST" action="{{ route('login') }}" class="shrink mt-10">
                     @csrf

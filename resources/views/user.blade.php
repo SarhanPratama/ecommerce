@@ -9,12 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="" name="description" />
     <meta content="coderthemes" name="author" />
-    
+
     @yield('css')
     @vite(['resources/js/head.js'])
 </head>
 
 <body>
+
     @include('sweetalert::alert')
 
     @yield('content')
@@ -24,7 +25,7 @@
     @yield('script')
 
     @include('layouts.shared/theme-mode')
-        
+
 </body>
 
 </html>

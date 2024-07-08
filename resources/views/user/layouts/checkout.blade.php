@@ -27,8 +27,9 @@
 
                     <div class="mt-10">
                         <div id="personal-detail-item" role="tabpanel" aria-labelledby="personal-detail">
-                            <form id="form1" action="{{ url('checkout') }}" method="POST">
+                            <form id="form1" action="{{ url('checkout') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="grid md:grid-cols-12 gap-6">
                                     <div class="md:col-span-6">
                                         <label for="f_name" class="mb-2.5 block text-sm font-medium text-default-700">Full Name</label>
@@ -38,29 +39,25 @@
                                         <label for="phone" class="mb-2.5 block text-sm font-medium text-default-700">Phone</label>
                                         <input name="phone" type="text" id="phone" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" placeholder="Phone No." />
                                     </div>
-                                    {{-- <div class="md:col-span-6">
-                                        <label for="l_name" class="mb-2.5 block text-sm font-medium text-default-700">Last Name</label>
-                                        <input type="text" id="l_name" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" placeholder="Enter Last Name" />
-                                    </div> --}}
+
                                     <div class="md:col-span-12">
                                         <label for="address" class="mb-2.5 block text-sm font-medium text-default-700">Address</label>
-                                        <input name="address" type="text" id="address" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" placeholder="203 Miceses Ave. st. Mountain View, San Francisco" />
+                                        <input name="address" type="text" id="address" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" placeholder="203 Miceses Ave. st. Mountain View, San Francisco" autocomplete="off"/>
                                     </div>
-                                    {{-- <div class="md:col-span-6">
-                                        <label for="password" class="mb-2.5 block text-sm font-medium text-default-700">Password</label>
-                                        <input type="password" id="password" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" />
-                                    </div> --}}
-                                    <div class="md:col-span-12">
-                                        {{-- <div class="flex justify-end gap-2">
-                                            <a href="" class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600">Register</a>
-                                            <a href="" class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600">Login</a>
-                                        </div> --}}
 
+                                    <div class="md:col-span-12">
+                                        <label for="Bukti Bayar" class="mb-2.5 block text-sm font-medium text-default-700">Upload Bukti Bayar</label>
+                                        <input class="form-control" type="file" name="foto" id="foto" >
+                                    </div>
+
+                                    <div class="md:col-span-12">
                                         <div class="flex justify-end gap-2 mt-6">
                                             <a href="{{ url('cart') }}" type="button" class="inline-flex items-center justify-center rounded-lg bg-primary/20 px-6 py-2.5 text-center text-sm font-medium text-primary shadow-sm transition-all duration-200 hover:text-white hover:bg-primary">Cancel Order</a>
                                             <button type="button" class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600">Shipping Address</button>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </form>
                         </div><!-- end personal detail -->
@@ -211,20 +208,6 @@
                                 <h3 class="text-base font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h3>
                             </div>
                             @endforeach
-                            {{-- <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-4">
-                                    <img src="/images/product/2.png" alt="" class="h-16 w-16">
-                                    <a href="" class="text-base font-medium text-default-800">Shale Snacks x2 kg</a>
-                                </div>
-                                <h3 class="text-base font-medium text-default-800">$17.00</h3>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-4">
-                                    <img src="/images/product/3.png" alt="" class="h-16 w-16">
-                                    <a href="" class="text-base font-medium text-default-800">Grapes x6 kg</a>
-                                </div>
-                                <h3 class="text-base font-medium text-default-800">$24.00</h3>
-                            </div> --}}
                         </div>
 
                         <div class="space-y-2">

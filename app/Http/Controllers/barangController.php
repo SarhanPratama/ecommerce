@@ -12,6 +12,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 class barangController extends Controller
 {
 
+    public function getBarang() {
+        $barang = DB::table('tbbarang')
+        ->leftjoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
+        ->select('tbbarang.*', 'tbkategori.nama as kategori')
+        ->get();
+
+        return $barang;
+    }
+
 
     public function index(Request $request)
     {
@@ -38,12 +47,13 @@ class barangController extends Controller
         $barang = $query->simplePaginate(3);
         // $totalProducts = $query->count();
         $page = $barang->currentPage();
-        
+
         $newProduct = DB::table('tbbarang')
         ->where('created_at', '>=', $sevenDaysAgo)
         ->count();
 
         $kategori = DB::table('tbkategori')->get();
+        
         $totalProducts = DB::table('tbbarang')->count();
 
         return view('admin.barang.admin-list')

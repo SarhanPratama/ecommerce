@@ -78,23 +78,19 @@
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6 mt-5">
             @foreach ($barang as $item)
-            <div
-                class="border border-default-200 rounded-xl overflow-hidden duration-500 hover:border-primary relative">
+            <div class="border border-default-200 rounded-xl overflow-hidden duration-500 hover:border-primary relative">
                 <div class="p-4">
                     <div class="relative">
                         <div class="absolute top-0 start-0">
-                            <span
-                                class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-primary/10 text-primary">{{ $item->kategori }}</span>
+                            <span class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-primary/10 text-primary">{{ $item->kategori }}</span>
                         </div>
                         <div class="absolute top-0 end-0">
-                            <span
-                                class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-red-500/10 text-red-500">Hot</span>
+                            <span class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-red-500/10 text-red-500">Hot</span>
                         </div>
                         @if ($item->foto)
                         @php
                         $gambarPaths = explode(',', $item->foto);
                         $gambar = $gambarPaths[0];
-                        // dd($gambar);
                         @endphp
                         <img src="{{ asset('storage/' . $gambar) }}" alt="Foto Barang">
                         @endif
@@ -102,15 +98,10 @@
                 </div>
 
                 <div class="border-t border-dashed border-default-200 p-4 whitespace-nowrap">
-                    <div class="mb-4">
-                        <a href="{{ route('detailProduct', $item->id) }}"
-                            class="text-default-600 text-xl font-semibold line-clamp-1 after:absolute after:inset-0 after:z-0">{{
-                            $item->nama }}</a>
-                    </div>
-
-                    <div class="flex items-center justify-between gap-2 mb-4">
-                        <h4 class="font-semibold text-xl text-primary">Rp. {{number_format($item->hj, 0, ',', '.') }}</h4>
-
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <a href="{{ route('detailProduct', $item->id) }}" class="text-default-600 text-xl font-semibold line-clamp-1 after:absolute after:inset-0 after:z-0">{{ $item->nama }}</a>
+                        </div>
                         <span class="flex items-center gap-2">
                             <span class="h-5 w-5 inline-flex items-center justify-center bg-primary text-white rounded-full">
                                 <i class="ti ti-star-filled text-sm"></i>
@@ -118,9 +109,25 @@
                             <span class="text-sm text-default-950 from-inherit">4.5</span>
                         </span>
                     </div>
-                    <div class="">
-                        <a href="{{ route('addToCart', ['id' => $item->id]) }}"
-                            class="shrink flex items-center justify-center rounded-lg bg-primary/20 text-primary px-6 py-2.5 text-center text-sm font-medium shadow-sm transition-all duration-200 hover:bg-primary hover:text-white relative z-10">
+
+                    <div class="flex items-center justify-between gap-2 mb-4">
+                        <h4 class="font-semibold text-xl text-primary">Rp. {{ number_format($item->hj, 0, ',', '.') }}</h4>
+
+                        <form class="quantity-form" action="{{ url('addToCart/' . $item->id) }}" method="get">
+                            @csrf
+                            <div class="relative z-10 inline-flex justify-between border border-default-200 p-1 rounded-full" data-hs-input-number>
+                                <button class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center" type="button" data-hs-input-number-decrement>
+                                    <i class="ti ti-minus"></i>
+                                </button>
+                                <input type="number" name="quantity" value="1" min="1" class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent" data-hs-input-number-input>
+                                <button class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center" type="button" data-hs-input-number-increment>
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <a class="submitAllForms shrink flex items-center justify-center rounded-lg bg-primary/20 text-primary px-6 py-2.5 text-center text-sm font-medium shadow-sm transition-all duration-200 hover:bg-primary hover:text-white relative z-10 cursor-pointer">
                             <i class="ti ti-shopping-bag text-xl me-2"></i>
                             <span>Add to cart</span>
                         </a><!-- end btn -->
@@ -128,6 +135,7 @@
                 </div>
             </div><!-- end card -->
             @endforeach
+
         </div><!-- end grid -->
     </div><!-- end container -->
 </section>
@@ -320,4 +328,15 @@
 
 @section('script')
 @vite(['resources/js/home.js'])
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.submitAllForms').forEach(function(button, index) {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.quantity-form')[index].submit();
+            });
+        });
+    });
+</script>
+
 @endsection

@@ -26,8 +26,8 @@
             <div class="my-auto">
                 <div class="max-w-xl mx-auto">
                     <h4 class="text-default-900 text-2xl font-semibold mb-2">Register</h4>
-                    <p class="text-default-600">Welcome! Get started by creating an account by filling the following
-                        details</p>
+                    {{-- <p class="text-default-600">Welcome! Get started by creating an account by filling the following
+                        details</p> --}}
                 </div>
                 <form action="{{ url('prosesregister') }}" method="POST" class="shrink mt-10">
                     @csrf

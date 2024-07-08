@@ -17,6 +17,7 @@ class AuthController extends Controller
 
     public function authenticate(Request $r)
     {
+
         $request = $r->only('email', 'password');
         if (Auth::attempt($request)) {
             return redirect('');
@@ -35,10 +36,14 @@ class AuthController extends Controller
         return redirect('login');
     }
 
+
+
+
+
     public function viewRegister()
     {
 
-        return view('auth.register');
+        return view('Auth.register');
     }
 
     public function register(Request $request)
@@ -53,7 +58,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'role' => 'user',
+
         ]);
         return redirect('login');
     }

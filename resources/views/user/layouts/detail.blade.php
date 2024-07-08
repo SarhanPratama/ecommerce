@@ -16,8 +16,8 @@
                     <div class="col-span-1">
                         <div class="swiper product-swiper border border-default-200 rounded-xl">
                             <div class="swiper-wrapper">
-                                @if ($barang->foto)
-                                @foreach (explode(',', $barang->foto) as $foto)
+                                @if ($saldoAkhir->foto)
+                                @foreach (explode(',', $saldoAkhir->foto) as $foto)
                                 <div class="swiper-slide">
                                     <div class="h-full w-full flex items-center justify-center">
                                         <img src="{{ asset('storage/' . $foto) }}" alt="Foto Barang">
@@ -33,8 +33,8 @@
                     <div class="col-span-1">
                         <div class="swiper product-swiper-pagination justify-center py-2">
                             <div class="swiper-wrapper justify-center gap-2 w-full">
-                                @if ($barang->foto)
-                                @foreach (explode(',', $barang->foto) as $foto)
+                                @if ($saldoAkhir->foto)
+                                @foreach (explode(',', $saldoAkhir->foto) as $foto)
                                 <div
                                     class="swiper-slide cursor-pointer !w-16 !h-16 sm:!w-24 sm:!h-24 lg:!w-32 lg:!h-32 p-2 border border-default-200 rounded-lg ring-2 ring-transparent [&.swiper-slide-thumb-active]:border-primary [&.swiper-slide-thumb-active]:ring-primary">
                                     <img src="{{ asset('storage/' . $foto) }}" alt="Foto Barang">
@@ -56,22 +56,11 @@
                             class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-red-500/10 text-red-500">Hot</span>
                     </div>
                     <h3 class="mb-4 font-semibold text-3xl text-default-800">
-                        {{ $barang->nama }}
+                        {{ $saldoAkhir->nama }}
                     </h3>
-                    {{-- <p class="text-base text-default-700 mb-4">Bananas are a versatile and nutritious fruit that offers
-                        a multitude of health benefits. Packed with essential nutrients such as potassium, vitamin C,
-                        and vitamin B6, bananas contribute to overall well-being.</p>
 
-                    <ul class="list-disc space-y-1.5 text-default-600 ps-6">
-                        <li>Nutrient-Rich: Packed with potassium, vitamin C, vitamin B6, and fiber.</li>
-                        <li>Quick Energy: Convenient and natural energy boost.</li>
-                        <li>Heart Health: High potassium aids blood pressure regulation.</li>
-                        <li>Digestive Aid: Fiber content supports digestion.</li>
-                        <li>Weight-Friendly: Low-calorie, high-fiber for satiety.</li>
-                        <li>Blood Sugar Support: Low glycemic index benefits diabetes management.</li>
-                        <li>Antioxidants: Dopamine and catechins combat oxidative stress.</li>
-                        <li>Mood Booster: Serotonin precursors may enhance mood.</li>
-                    </ul> --}}
+                    <h4 class="font-semibold text-xl text-primary">Rp. {{ number_format($saldoAkhir->hj, 0, ',', '.') }}
+                    </h4>
 
                     <div class="flex items-center gap-2 my-4">
                         <div class="flex gap-1.5">
@@ -87,51 +76,51 @@
                     <div class="my-6">
                         <h6 class="text-base text-default-800 mb-2">
                             <span>Stock : </span>
-                            <span class="text-default-400">{{ $barang->saldoakhir }} {{ $barang->namasatuan }}</span>
-                        </h6> 
+                            <span class="text-default-400">{{ $saldoAkhir->saldoakhir }} {{ $saldoAkhir->namasatuan }}</span>
+                        </h6>
                         <h6 class="text-base text-default-800 mb-2">
                             <span>Category : </span>
-                            <span class="text-default-400">{{ $barang->nama }}</span>
+                            <span class="text-default-400">{{ $saldoAkhir->kategori }}</span>
                         </h6>
-                        {{-- <h6 class="text-base text-default-800">
-                            <span>Tag:</span>
-                            <span class="text-default-400">Nature's Energy Boost: Bananas 🍌</span>
-                        </h6> --}}
+
                     </div><!-- end category && Tags -->
 
-                    <div class="flex items-center gap-2">
-                        <p class="text-sm font-medium">Quantity :-</p>
-                        <div class="relative z-10 inline-flex justify-between border border-default-200 p-1 rounded-full"
-                            data-hs-input-number="">
-                            <button
-                                class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
-                                type="button" data-hs-input-number-decrement="">
-                                <i class="ti ti-minus"></i>
-                            </button>
-                            <input type="number"
-                                class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
-                                value="1" data-hs-input-number-input="">
-                            <button
-                                class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
-                                type="button" data-hs-input-number-increment="">
-                                <i class="ti ti-plus"></i>
-                            </button>
+                    <form id="quantity-form" action="{{ url('addToCart/'. $saldoAkhir->id) }}" method="get">
+                        @csrf
+                        <div class="flex items-center gap-2">
+                            <p class="text-sm font-medium">Quantity : </p>
+                            <div class="relative z-10 inline-flex justify-between border border-default-200 p-1 rounded-full"
+                                data-hs-input-number="">
+                                <button
+                                    class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
+                                    type="button" data-hs-input-number-decrement="">
+                                    <i class="ti ti-minus"></i>
+                                </button>
+                                <input type="number"
+                                    class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
+                                    name="quantity" id="quantity" min="1" value="1" data-hs-input-number-input="">
+                                <button
+                                    class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
+                                    type="button" data-hs-input-number-increment="">
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                     <div class="flex flex-wrap gap-2 items-center capitalize mt-6 w-full">
                         <button type="button"
                             class="p-1 pe-4 flex items-center justify-center gap-2 rounded-2xl border border-b-2 border-primary-600 text-white bg-primary-600 backdrop-blur-xl hover:text-white hover:border-primary-700 hover:bg-primary-700 drop-shadow-lg transition-all duration-300 group">
                             <span
-                                class="h-10 w-10 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-xl text-white group-hover:bg-white/20 transition-all duration-300">
+                                class="h-10 w-10 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-xl text-primary group-hover:bg-white/20 transition-all duration-300">
                                 <i class="ti ti-shopping-bag text-xl"></i>
                             </span>
-                            <a href="{{ url('addToCart/'. $barang->id) }}" class="text-base font-semibold">Add To Cart</a>
+                            <a id="submit" class="text-base font-semibold">Add To Cart</a>
                         </button>
                         <button type="button"
                             class="p-1 pe-4 flex items-center justify-center gap-2 rounded-2xl border border-b-2 border-primary-600 text-white bg-primary-600 backdrop-blur-xl hover:text-white hover:border-primary-700 hover:bg-primary-700 drop-shadow-lg transition-all duration-300 group">
                             <span
-                                class="h-10 w-10 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-xl text-white group-hover:bg-white/20 transition-all duration-300">
+                                class="h-10 w-10 flex items-center justify-center bg-white/20 backdrop-blur-xl rounded-xl text-primary group-hover:bg-white/20 transition-all duration-300">
                                 <i class="ti ti-credit-card text-xl"></i>
                             </span>
                             <span class="text-base font-semibold">Buy Now</span>
@@ -172,26 +161,7 @@
             <div class="mt-6">
                 <div id="descriptions" role="tabpanel" aria-labelledby="descriptions-item">
                     <div class="">
-                        <p class="text-base text-default-600 mb-10">{{ $barang->desc }}</p>
-
-                        <div class="max-w-3xl border border-default-200 rounded-lg p-6">
-                            <div class="grid md:grid-cols-2">
-                                <div class="flex  items-center">
-                                    <i data-lucide="tag" class="text-primary w-8 h-8 me-4"></i>
-                                    <div class="">
-                                        <h6 class="text-base font-semibold text-default-800 mb-2">50% Discount</h6>
-                                        <p>Save your 50% money with us</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <i data-lucide="hop-off" class="text-primary w-8 h-8 me-4"></i>
-                                    <div class="">
-                                        <h6 class="text-base font-semibold text-default-800">100% Organic</h6>
-                                        <p>100% Organic Vegetables</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="text-base text-default-600 mb-10">{{ $saldoAkhir->desc }}</p>
                     </div><!-- end grid -->
                 </div><!-- end descriptions -->
 
@@ -491,7 +461,8 @@
                     <div class="relative">
                         <div class="absolute top-0 start-0">
                             <span
-                                class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-primary/10 text-primary">{{ $item->kategori }}</span>
+                                class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-primary/10 text-primary">{{
+                                $item->kategori }}</span>
                         </div>
                         <div class="absolute top-0 end-0">
                             <span
@@ -509,41 +480,53 @@
                 </div>
 
                 <div class="border-t border-dashed border-default-200 p-4">
-                    <div class="mb-4">
-                        <a href=""
-                            class="text-default-600 text-xl font-semibold line-clamp-1 after:absolute after:inset-0 after:z-0">{{ $item->nama }}</a>
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+
+                            <a href=""
+                                class="text-default-600 text-xl font-semibold line-clamp-1 after:absolute after:inset-0 after:z-0">{{
+                                $item->nama }}</a>
+                        </div>
+                        <div>
+
+                            <span class="flex items-center gap-2">
+                                <span
+                                    class="h-5 w-5 inline-flex items-center justify-center bg-primary text-white rounded-full"><i
+                                        class="ti ti-star-filled text-sm"></i></span>
+                                <span class="text-sm text-default-950 from-inherit">4.5</span>
+                            </span>
+                        </div>
                     </div>
 
                     <div class="flex items-center justify-between gap-2 mb-4">
-                        <span class="flex items-center gap-2">
-                            <span
-                                class="h-5 w-5 inline-flex items-center justify-center bg-primary text-white rounded-full"><i
-                                    class="ti ti-star-filled text-sm"></i></span>
-                            <span class="text-sm text-default-950 from-inherit">4.5</span>
-                        </span>
-
-                        <div class="relative z-10 inline-flex justify-between border border-default-200 p-1 rounded-full"
-                            data-hs-input-number="">
-                            <button
-                                class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
-                                type="button" data-hs-input-number-decrement="">
-                                <i class="ti ti-minus"></i>
-                            </button>
-                            <input type="number"
-                                class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
-                                value="1" data-hs-input-number-input="">
-                            <button
-                                class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
-                                type="button" data-hs-input-number-increment="">
-                                <i class="ti ti-plus"></i>
-                            </button>
+                        <div>
+                            <h4 class="font-semibold text-xl text-primary">Rp. {{
+                                number_format($item->hj, 0, ',', '.') }} </h4>
                         </div>
+
+                        <form class="quantity-form" action="{{ url('addToCart/' . $item->id) }}" method="get">
+                            @csrf
+                            <div class="relative z-10 inline-flex justify-between border border-default-200 p-1 rounded-full"
+                                data-hs-input-number>
+                                <button
+                                    class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
+                                    type="button" data-hs-input-number-decrement>
+                                    <i class="ti ti-minus"></i>
+                                </button>
+                                <input type="number" name="quantity" value="1" min="1"
+                                    class="w-8 border-0 text-sm text-center text-default-800 focus:ring-0 p-0 bg-transparent"
+                                    data-hs-input-number-input>
+                                <button
+                                    class="shrink bg-default-200 text-default-800 rounded-full h-6 w-6 text-sm inline-flex items-center justify-center"
+                                    type="button" data-hs-input-number-increment>
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="flex items-center justify-between gap-2">
-                        <h4 class="font-semibold text-xl text-primary">Rp. {{
-                            number_format($item->hj, 0, ',', '.') }} </h4>
-                        <a href=" "
-                            class="shrink flex items-center justify-center rounded-lg bg-primary/20 text-primary px-6 py-2.5 text-center text-sm font-medium shadow-sm transition-all duration-200 hover:bg-primary hover:text-white">
+                    <div>
+                        <a href=""
+                            class="submitAllForms shrink flex items-center justify-center rounded-lg bg-primary/20 text-primary px-6 py-2.5 text-center text-sm font-medium shadow-sm transition-all duration-200 hover:bg-primary hover:text-white">
                             <i class="ti ti-shopping-bag text-xl me-2"></i>
                             <span>Add to cart</span>
                         </a><!-- end btn -->
@@ -564,4 +547,12 @@
 
 @section('script')
 @vite(['resources/js/product-detail.js'])
+
+<script>
+    document.getElementById('submit').addEventListener('click', function () {
+        document.getElementById('quantity-form').submit();
+    });
+</script>
+
+
 @endsection

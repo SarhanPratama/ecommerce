@@ -7,7 +7,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\barangController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\kategoriController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\ordercontroller;
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'authenticate']);
@@ -25,9 +25,16 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
             ->with('title', 'Dashboard')
             ->with('totalProducts', $totalProducts);
     });
+
     Route::resource('product', barangController::class);
+
     Route::patch('/update-status/{id}', [barangController::class, 'updateStatus'])->name('updateStatus');
+
     Route::resource('category', kategoriController::class);
+
+    Route::resource('order', ordercontroller::class);
+
+    Route::post('/updateOrderStatus/{nobukti}/{action}', [ordercontroller::class, 'updateOrderStatus'])->name('update.order.status');
 });
 
 Route::get('/error', function () {
@@ -37,6 +44,10 @@ Route::get('/error', function () {
 Route::get('', [userController::class, 'index'])->name('root');
 
 Route::get('contact', [userController::class, 'contact']);
+
+Route::get('account/profile', [userController::class, 'profile'])->middleware('auth');
+
+Route::get('account/order-list/', [userController::class, 'orderList'])->middleware('auth');
 
 Route::get('detail/{id}', [userController::class, 'detailProduct'])->name('detailProduct');
 
@@ -48,12 +59,12 @@ Route::get('cart', [userController::class, 'cart'])->name('cart')->middleware('a
 
 Route::get('addToCart/{id}', [userController::class, 'addToCart'])->name('addToCart')->middleware('auth');
 
-Route::delete('/delete-cart-product/{id}', [UserController::class, 'deleteCart'])->name('delete.cart.product')->middleware('auth');
+Route::delete('/delete-cart-product/{id}', [userController::class, 'deleteCart'])->name('delete.cart.product')->middleware('auth');
 
 Route::get('checkout', [checkoutController::class, 'checkout'])->name('checkout')->middleware('auth');
 
-Route::post('/checkout', [checkoutController::class, 'prosescheckout']);
+Route::post('/checkout', [checkoutController::class, 'prosescheckout'])->middleware('auth');
 
-Route::get('/checkout/detail', [userController::class, 'checkoutDetail']);
+Route::get('/checkout/detail', [userController::class, 'orderDetail'])->middleware('auth');
 
-Route::get('/invoice', [userController::class, 'invoice']);
+Route::get('/invoice', [userController::class, 'invoice'])->middleware('auth');

@@ -12,36 +12,33 @@
 
     <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
         <div class="p-5 flex flex-wrap items-center gap-3 border-b border-default-200">
-            <h4 class="text-xl font-medium text-default-900">Order FM1020#20</h4>
+            <h4 class="text-xl font-medium text-default-900">Order {{ $orderDetail->nobukti  }}</h4>
             <div class="flex flex-wrap items-center gap-3">
                 <i class="ti ti-point-filled"></i>
-                <h4 class="text-sm text-default-600">September 23, 2023</h4>
+                <h4 class="text-sm text-default-600">{{ date('F d, Y H;i', strtotime($orderDetail->tgl)) }}</h4>
             </div>
             <div class="flex flex-wrap items-center gap-3">
                 <i class="ti ti-point-filled"></i>
                 <h4 class="text-sm text-default-600">3 Products</h4>
             </div>
 
-            <a href="" class="ms-auto text-base font-medium text-primary">Back to List</a>
+            <a href="{{ url('/') }}" class="ms-auto text-base font-medium text-primary">Back to Home</a>
         </div>
         <div class="p-5">
             <div class="grid xl:grid-cols-4 gap-10">
                 <div class="xl:col-span-3 col-span-1">
-                    <form action="">
-                        <div class="flex flex-col flex-wrap md:flex-row w-full md:items-end gap-2 mb-6">
-                            <div class="md:grow">
-                                <label for="order_id" class="mb-2.5 block text-sm font-medium text-default-700">Order ID</label>
-                                <input type="text" id="order_id" class="py-2.5 text-sm block w-full rounded border-default-200 bg-default-50 focus:ring-0 focus:border-primary" placeholder="Enter your order id">
-                            </div>
-                            <div class="md:shrink-0">
-                                <a href="#" class="w-full sm:w-auto inline-flex items-center justify-center rounded border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all">Track Order</a>
-                            </div>
-                        </div>
-                    </form>
                     <div class="relative mt-20 mb-10">
                         <div class="md:flex hidden mx-20 -mb-6">
                             <div class="flex w-full h-1.5 bg-default-200 rounded-full overflow-hidden">
-                                <div class="w-1/2 flex flex-col justify-center overflow-hidden bg-primary rounded-full"></div>
+                                @if ($orderDetail->status == 'pending')
+                                <div class=" flex flex-col justify-center overflow-hidden bg-primary rounded-full" style="width: 25%"></div>
+                                @elseif($orderDetail->status == 'process')
+                                <div class=" flex flex-col justify-center overflow-hidden bg-primary rounded-full" style="width: 50%"></div>
+                                @elseif($orderDetail->status == 'delivery')
+                                <div class=" flex flex-col justify-center overflow-hidden bg-primary rounded-full" style="width: 75%"></div>
+                                @elseif($orderDetail->status == 'delivered')
+                                <div class=" flex flex-col justify-center overflow-hidden bg-primary rounded-full" style="width: 100%"></div>
+                                @endif
                             </div>
                         </div>
 
@@ -62,23 +59,80 @@
                             </div>
 
                             <div class="flex flex-col justify-center items-center">
-                                <div class="bg-primary rounded-full w-10 h-10 flex justify-center items-center">
+                                <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+                                    @if($orderDetail->status == 'pending')
                                     <span class="text-sm font-medium text-white">02</span>
+                                    @elseif($orderDetail->status == 'process' or 'delivery')
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    @endif
                                 </div>
+                                <h4 class="text-sm text-default-800 mt-3 p-2 md:bg-transparent bg-default-100 md:shadow-none shadow rounded-lg">Pending</h4>
+                            </div>
+
+                            <div class="flex flex-col justify-center items-center">
+                                    @if($orderDetail->status == 'pending')
+                                    <div class="backdrop-blur-sm border border-dashed border-primary rounded-full w-10 h-10 flex justify-center items-center">
+                                    <span class="text-sm font-medium text-primary">03</span>
+                                    </div>
+                                    @elseif($orderDetail->status == 'process')
+                                    <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+                                        <span class="text-sm font-medium text-white">03</span>
+                                    </div>
+                                    @elseif($orderDetail->status == 'delivery' or 'delivered')
+                                <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+
+                                    @endif
                                 <h4 class="text-sm text-default-800 mt-3 p-2 md:bg-transparent bg-default-100 md:shadow-none shadow rounded-lg">Processing</h4>
                             </div>
 
                             <div class="flex flex-col justify-center items-center">
+                                @if ($orderDetail->status == 'pending')
                                 <div class="backdrop-blur-sm border border-dashed border-primary rounded-full w-10 h-10 flex justify-center items-center">
-                                    <span class="text-sm font-medium text-primary">03</span>
+                                    <span class="text-sm font-medium text-primary">04</span>
                                 </div>
+                                @elseif($orderDetail->status == 'process')
+                                <div class="backdrop-blur-sm border border-dashed border-primary rounded-full w-10 h-10 flex justify-center items-center">
+                                    <span class="text-sm font-medium text-primary">04</span>
+                                </div>
+                                @elseif($orderDetail->status == 'delivery')
+                                <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+                                    <span class="text-sm font-medium text-white">04</span>
+                                </div>
+                                @elseif($orderDetail->status == 'delivered')
+                                <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                @endif
+
                                 <h4 class="text-sm text-default-800 mt-3 p-2 md:bg-transparent bg-default-100 md:shadow-none shadow rounded-lg">On the way</h4>
                             </div>
 
                             <div class="flex flex-col justify-center items-center">
-                                <div class="backdrop-blur-sm border border-dashed border-primary rounded-full w-10 h-10 flex justify-center items-center">
-                                    <span class="text-sm font-medium text-primary">04</span>
+                                @if ($orderDetail->status == 'delivered')
+                                <div class="bg-primary rounded-full text-white w-10 h-10 flex justify-center items-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
                                 </div>
+
+                                @elseif($orderDetail->status == 'pending' or 'process' or 'delivery')
+
+                                <div class="backdrop-blur-sm border border-dashed border-primary rounded-full w-10 h-10 flex justify-center items-center">
+                                    <span class="text-sm font-medium text-primary">05</span>
+                                </div>
+                                @endif
+
                                 <h4 class="text-sm text-default-800 mt-3 p-2 md:bg-transparent bg-default-100 md:shadow-none shadow rounded-lg">Delivered</h4>
                             </div>
                         </div>
@@ -99,11 +153,11 @@
                                             </tr><!--  end tr -->
                                         </thead><!--  end t-head -->
                                         <tbody class="divide-y divide-default-200">
-                                            @foreach ($cartItems as $item)
+                                            @foreach ($orderItems as $item)
 
 
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-default-800">
+                                                <td class="flex px-6 py-4 whitespace-nowrap text-sm font-medium text-default-800">
                                                     @if ($item->foto)
                                                     @php
                                                     $gambarPaths = explode(',', $item->foto);
@@ -114,8 +168,8 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-default-800">{{ $item->nama }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-default-800">Rp. {{ number_format($item->hj, 0, ',', '.') }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-default-800">x{{ $item->qtyj }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-default-800">$70.00</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-default-800">x{{ $item->qty }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
                                             </tr><!--  end tr -->
 
                                             @endforeach
@@ -128,42 +182,17 @@
 
                     <div class="pt-10">
                         <div class="grid lg:grid-cols-12 grid-cols-1 gap-4">
-                            <div class="lg:col-span-8 col-span-1">
-                                <div class="grid md:grid-cols-2 gap-6">
-                                    <div class="border border-default-200 rounded-lg">
-                                        <div class="px-4 py-4">
-                                            <h1 class="text-lg font-medium text-default-800 mb-4">Billing Address</h1>
-                                            <h6 class="text-lg font-medium text-default-800 mb-2">Gustavo Schleifer</h6>
-                                            <p class="text-base mb-6">3042 Allentown Apartment, Parker Road. New York 311434 USA.</p>
-                                            <p class="text-base text-default-800 mb-4">dainne.ressell@gmail.com</p>
-                                            <p class="text-base text-default-800 mb-4">(123) 278-4567</p>
-
-                                            <a href="#" class="inline-flex items-center justify-center rounded border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all">Edit Address</a>
-                                        </div>
-                                    </div><!-- end card -->
-
-                                    <div class="border border-default-200 rounded-lg">
-                                        <div class="px-4 py-4">
-                                            <h1 class="text-lg font-medium text-default-800 mb-4">Shipping Address</h1>
-                                            <h6 class="text-lg font-medium text-default-800 mb-2">Jaydon Lubin</h6>
-                                            <p class="text-base mb-6">3042 Allentown Apartment, Parker Road. New York 311434 USA.</p>
-                                            <p class="text-base text-default-800 mb-4">dainne.ressell@gmail.com</p>
-                                            <p class="text-base text-default-800 mb-4">(123) 278-4567</p>
-
-                                            <a href="#" class="inline-flex items-center justify-center rounded border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all">Edit Address</a>
-                                        </div>
-                                    </div><!-- end card -->
-                                </div>
-                            </div><!-- end grid-col -->
+                            <!-- Empty columns to push the content to the right -->
+                            <div class="lg:col-span-8 col-span-1"></div>
 
                             <div class="lg:col-span-4 col-span-1">
                                 <div class="border border-default-200 rounded-lg">
                                     <div class="px-4 py-2 border-b border-default-200">
                                         <p class="text-default-900 font-medium uppercase mb-2">Order ID:</p>
-                                        <p class="text-default-800">#4152</p>
+                                        <p class="text-default-800">{{ $orderDetail->nobukti }}</p>
                                     </div>
                                     <div class="divide-y divide-default-200">
-                                        <div class="p-4 flex justify-between">
+                                        {{-- <div class="p-4 flex justify-between">
                                             <p class="text-default-500 w-1/2">Subtotal:</p>
                                             <p class="text-default-800 w-1/2 text-end">$365.00</p>
                                         </div>
@@ -174,16 +203,17 @@
                                         <div class="p-4 flex justify-between">
                                             <p class="text-default-500 w-1/2">Shipping</p>
                                             <p class="text-default-800 w-1/2 text-end">Free</p>
-                                        </div>
+                                        </div> --}}
                                         <div class="p-4 flex justify-between">
                                             <p class="text-default-500 w-1/2">Total</p>
-                                            <p class="text-default-800 w-1/2 text-end">$292.00</p>
+                                            <p class="text-default-800 w-1/2 text-end">Rp. {{ number_format($orderDetail->total, 0, ',', '.') }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- end grid-col -->
                         </div><!-- end grid -->
                     </div>
+
                 </div>
                 <div class="space-y-6">
                     <div class="rounded-lg border border-default-200">

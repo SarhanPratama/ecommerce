@@ -62,8 +62,6 @@ class kategoriController extends Controller
 
             // Pindahkan file foto ke direktori penyimpanan
             $foto->storeAs('public/kategori', $namaFoto);
-
-            // Simpan nama file foto ke dalam array $x
             $x['foto'] = $namaFoto;
         }
 
@@ -98,27 +96,27 @@ class kategoriController extends Controller
         $x = [
             'nama' => 'required|string|max:255',
         ];
-    
+
         // Cek apakah ada file foto yang diunggah
         if ($r->hasFile('foto')) {
             // Validasi file foto
             $r->validate([
                 'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-    
+
             // Ambil file foto yang diunggah
             $foto = $r->file('foto');
-    
+
             // Tentukan nama unik untuk file foto
             $namaFoto = time() . '.' . $foto->getClientOriginalExtension();
-    
+
             // Pindahkan file foto ke direktori penyimpanan
             $foto->storeAs('public/kategori', $namaFoto);
             Alert::success('Success', 'Data Berhasil Diupdate');
             // Simpan nama file foto ke dalam array $x
             $x['foto'] = $namaFoto;
         }
-    
+
         // Update data kategori berdasarkan ID
         DB::table('tbkategori')
             ->where('id', $id)
@@ -127,12 +125,12 @@ class kategoriController extends Controller
                 'foto' => isset($x['foto']) ? $x['foto'] : null, // Simpan nama gambar ke dalam kolom gambar jika ada
                 'updated_at' => now(),
             ]);
-    
+
         // Tampilkan pesan sukses dan redirect ke halaman index
         Alert::success('Success', 'Data Berhasil Diupdate');
         return redirect()->route('category.index');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.

@@ -867,13 +867,6 @@
       </li>
 
       <li class="menu-item hidden lg:flex">
-        <a href=""
-          class="relative inline-flex h-10 w-10 flex-shrink-0 items-center justify-center gap-2 rounded-full bg-default-100 align-middle font-medium text-default-700 transition-all hover:text-primary">
-          <i class="ti ti-heart text-xl"></i>
-        </a>
-      </li>
-
-      <li class="menu-item hidden lg:flex">
         <div class="hs-dropdown relative inline-flex [--placement:bottom-right] [--trigger:hover]">
           <a class="hs-dropdown-toggle inline-flex h-10 w-10 flex-shrink-0 items-center justify-center gap-2 rounded-full bg-default-100 align-middle font-medium text-default-700 transition-all after:absolute after:inset-0 hover:text-primary hover:after:-bottom-10"
             href="#">
@@ -914,7 +907,7 @@
               @endif
               <li class="px-1.5">
                 <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700"
-                  href=""><i class="ti ti-user-circle me-2 text-lg"></i> My Account</a>
+                  href="{{ url('account/profile') }}"><i class="ti ti-user-circle me-2 text-lg"></i> My Account</a>
               </li>
               <li class="px-1.5">
                 <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700"
@@ -925,10 +918,13 @@
                 <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-default-100 hover:text-default-700"
                   href="{{ url('cart') }}"><i class="ti ti-shopping-cart me-2 text-lg"></i> Cart</a>
               </li>
+              @auth
+
               <li class="px-1.5">
-                <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-red-500/10 hover:text-red-500"
+                  <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-red-500/10 hover:text-red-500"
                   href="{{ url('logout') }}"><i class="ti ti-logout-2 me-2 text-lg"></i> Log Out</a>
-              </li>
+                </li>
+                @endauth
             </ul>
           </div>
         </div>

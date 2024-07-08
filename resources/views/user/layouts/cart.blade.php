@@ -72,11 +72,11 @@
                                             <div
                                                 class="h-10 w-10 inline-flex items-center justify-center bg-transparent transition-all cursor-pointer rounded-full hover:bg-red-500/20">
                                                 <form action="{{ route('delete.cart.product', $item->idbarang) }}"
-                                                    method="POST" data-confirm-delete="true">
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit">
+                                                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                                         <i class="h-5 w-5 stroke-red-500" data-lucide="trash"></i>
                                                     </button>
                                                 </form>
@@ -89,7 +89,7 @@
                                             data-lucide="heart"></i>
                                         <div class="mt-auto">
                                             <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($item->harga, 0, ',', '.') }}</h5>
-                                            {{-- <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p> --}}
+                                            <!-- {{-- <p class="text-sm text-default-600">Delivery on Thursday, 23 March</p> --}} -->
                                         </div>
                                     </div>
                                 </div>
@@ -100,8 +100,8 @@
                     <div class="flex justify-end gap-2">
                         <a class="rounded-md border border-primary px-6 py-2.5 text-center text-sm font-medium text-primary shadow-sm transition-all hover:text-white hover:bg-primary"
                             href="{{ url('') }}">Go To Back</a>
-                        <a class="rounded-md border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600 hover:border-primary-600"
-                            href="{{ url('checkout') }}">Checkout</a>
+                        {{-- <a class="rounded-md border border-primary bg-primary px-6 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary-600 hover:border-primary-600"
+                            href="{{ url('checkout') }}">Checkout</a> --}}
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                             <p class="text-base text-default-600">Sub Total :</p>
                             <h5 class="text-lg font-medium text-default-800">Rp. {{ number_format($totalHarga, 0, ',', '.') }}</h5>
                         </div>
-                        {{-- <div class="flex items-center justify-between p-4">
+                        <!-- {{-- <div class="flex items-center justify-between p-4">
                             <p class="text-base text-default-600">Total Discount :</p>
                             <h5 class="text-lg font-medium text-default-800">$24.00</h5>
                         </div> --}}
@@ -126,12 +126,12 @@
                         {{-- <div class="flex items-center justify-between p-4">
                             <p class="text-base font-medium text-default-600">Coupon Discount :</p>
                             <button class="text-sm font-medium text-white bg-primary px-3 py-1 rounded ">Apply</button>
-                        </div> --}}
+                        </div> --}} -->
                         <div class="p-4">
                             <div class="flex items-center justify-between">
                                 <p class="text-base text-default-600">Delivery :</p>
 
-                                <p class="inline-block text-sm text-default-600">*Free shipping over $150</p>
+                                <p class="inline-block text-sm text-default-600">*Free shipping</p>
                             </div>
                         </div>
                         <div class="flex items-center justify-between p-4">
@@ -140,7 +140,7 @@
                         </div>
                         <div class="p-4">
                             <a class="flex items-center justify-center w-full px-6 py-2.5 rounded-md text-base bg-primary text-white transition-all font-medium hover:bg-primary-600"
-                                href="">Continue to Checkout</a>
+                                href="{{ url('checkout') }}">Continue to Checkout</a>
                         </div>
                     </div>
                 </div>
