@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
-use Termwind\Components\Dd;
-
-use function Laravel\Prompts\select;
 
 class userController extends Controller
 {

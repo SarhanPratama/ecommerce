@@ -63,93 +63,68 @@
 
     <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
         <div class="flex flex-wrap items-center justify-between py-4 px-5">
-            <div class="relative lg:flex hidden">
+            <div class="flex flex-wrap items-center gap-4">
+
+                <a href="{{ url('admin/resetnobukti') }}" target="_blank"
+                    class="py-2.5 px-4 inline-flex rounded-lg text-sm font-medium bg-primary text-white transition-all hover:bg-primary-500">Tambah Data</a>
+
+            </div>
+            <div class="relative lg:flex hidden ">
                 <input type="search" class="ps-12 pe-4 py-2.5 block w-64 bg-default-50/0 text-default-600 border-default-200 rounded-lg text-sm focus:border-primary focus:ring-primary" placeholder="Search...">
                 <span class="absolute start-4 top-2.5">
                     <i class="ti ti-search text-lg/none"></i>
                 </span>
             </div>
+
         </div>
         <div class="border-t border-dashed border-default-200 relative overflow-x-auto">
+
             <table class="min-w-full">
                 <thead class="border-b border-dashed border-default-200">
                     <tr>
-                        <!-- <td class="px-6 py-3 w-10 font-medium text-default-900">
-                            <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
-                        </td> -->
-                        <!-- <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Img</th> -->
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Order Name</th>
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Customer</th>
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Date & TIme</th>
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Bukti Bayar</th>
-                        <!-- <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Payment</th> -->
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Status</th>
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Amount</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">No</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Product</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">No Bukti</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Pemasok</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Date & Time</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Keterangan</th>
+                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Amount</th>
+                        {{-- <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Status</th> --}}
+
                         <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Action</th>
-                        <th scope="col" class="px-3 py-3 text-center text-base capitalize font-semibold text-default-900 min-w-32">Action</th>
+
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-dashed divide-default-200">
-                    @foreach($dataJual as $item)
+                    @foreach($dataBeli as $item)
                     <tr>
-                        <!-- <td class="px-6 py-3">
-                            <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
-                        </td> -->
-                        <!-- <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
-                            <img src="/images/product/1.png" alt="" class="h-10 w-10">
-                        </td> -->
+                        <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap"><b>{{ $loop->iteration }}</b></td>
+                        <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
+                            <spam class="flex items-center gap-2">
+                                <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">
+                                    @if ($item->foto)
+                                    @php
+                                    $gambarPaths = explode(',', $item->foto);
+                                    $gambar = $gambarPaths[0];
+                                    @endphp
+                                    <img src="{{ asset('storage/' . $gambar) }}" alt="Foto Barang">
+                                    @endif
+                                </span>
+                                <h6 class="text-sm font-semibold text-default-700">{{ $item->namabarang }}</h6>
+                            </spam>
+                        </td>
                         <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap"><b>{{ $item->nobukti }}</b></td>
                         <td class="px-6 py-3 whitespace-nowrap">
-                            <h6 class="text-sm font-semibold text-default-700">{{ $item->name }}</h6>
+                            <h6 class="text-sm font-semibold text-default-700">{{ $item->namapemasok }}</h6>
                         </td>
+                        {{-- <td class="px-6 py-3 whitespace-nowrap">
+                            <h6 class="text-sm font-semibold text-default-700">{{ $item->namabarang }}</h6>
+                        </td> --}}
                         <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
                             <span class="block mb-0.5"> {{ (new DateTime($item->tgl))->format('d M Y (h:i a)') }}</span>
                         </td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
-                            <span class="h-10 w-10 inline-flex items-center justify-center rounded-full cursor-pointer" onclick="openModal('{{ asset('storage/' . str_replace('public/', '', $item->foto)) }}')">
-                                <img src="wa" alt="Foto Barang" class="object-cover h-10 w-10 rounded-full">
-                            </span>
-
-                        </td>
-
-
-                        <!-- <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Paypal</td> -->
-                        <td class="px-6 py-3 text-primary font-medium whitespace-nowrap">
-                            @if ($item->status == 'pending')
-                            <span class="px-3 py-1 text-xs font-medium rounded-md bg-amber-500/20 text-amber-500">
-                                Pending
-                            </span>
-                            @elseif($item->status == 'process')
-                            <span class="px-3 py-1 text-xs font-medium rounded-md bg-amber-500/20 text-amber-500">
-                                Processing
-                            </span>
-                            @elseif($item->status == 'delivery')
-                            <span class="px-3 py-1 text-xs font-medium rounded-md bg-sky-500/20 text-sky-500">delivery</span>
-                            @elseif($item->status == 'delivered')
-                            <span class="px-3 py-1 text-xs font-medium rounded-md bg-sky-500/20 text-sky-500">delivered</span>
-                            @endif
-                        </td>
-                        <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">Rp. {{ number_format($item->total,0, ',', '.') }}</td>
-                        <td class="px-6 py-3 text-primary font-medium whitespace-nowrap">
-                            @if ($item->status == 'pending')
-                            <form action="{{ route('update.order.status', ['nobukti' => $item->nobukti, 'action' => 'process']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Process</button>
-                            </form>
-                            @elseif ($item->status == 'process')
-                                <form action="{{ route('update.order.status', ['nobukti' => $item->nobukti, 'action' => 'deliver']) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Delivery</button>
-                                </form>
-                            @elseif ($item->status == 'delivery')
-                            <form action="{{ route('update.order.status', ['nobukti' => $item->nobukti, 'action' => 'delivered']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="bg-primary text-white px-4 py-2 rounded">Success</button>
-                            </form>
-                            {{-- <span class="px-3 py-1 text-xs font-medium rounded-md bg-primary/20 text-primary">Success</span> --}}
-
-                            @endif
-                        </td>
+                        <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">{{ $item->ket }}</td>
+                        {{-- <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">Rp. {{ number_format($item->harga,0, ',', '.') }}</td> --}}
                         <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                             <div class="flex items-center justify-center gap-2">
                                 <a href="" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
@@ -197,8 +172,13 @@
     </div>
 </div>
 
+
+
+
 <!-- Tambahkan script JavaScript -->
 <script>
+
+
     function openModal(imageSrc) {
         document.getElementById('modal-image').src = imageSrc;
         document.getElementById('modal').classList.remove('hidden');
@@ -207,6 +187,8 @@
     function closeModal() {
         document.getElementById('modal').classList.add('hidden');
     }
+
+
 </script>
 
 @endsection

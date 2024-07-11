@@ -53,7 +53,7 @@ class barangController extends Controller
         ->count();
 
         $kategori = DB::table('tbkategori')->get();
-        
+
         $totalProducts = DB::table('tbbarang')->count();
 
         return view('admin.barang.admin-list')
@@ -78,6 +78,7 @@ class barangController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate(
             [
                 'kode' => 'required|unique:tbbarang',
@@ -90,18 +91,6 @@ class barangController extends Controller
                 'desc' => 'required',
                 'pajang' => 'required',
                 'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ],
-            [
-                'kode.unique' => 'Kode Sudah Terdaftar',
-                'kode' => 'Kode Barang Wajib Diisi',
-                'nama' => 'Nama Barang Wajib Diisi',
-                'idsatuan' => 'Satuan Barang Wajib Diisi',
-                'idkategori' => 'Kategori Barang Wajib Diisi',
-                'sawal' => 'Saldo Awal Barang Wajib Diisi',
-                'hb.required' => 'Harga Beli Barang Wajib Diisi',
-                'hj.required' => 'Harga Jual Barang Wajib Diisi',
-                'desc.required' => 'Deskripsi Wajib Diisi',
-                'pajang.required' => 'Panjang Wajib Diisi',
             ]
         );
 

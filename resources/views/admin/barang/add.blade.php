@@ -27,18 +27,12 @@
                             <input
                                 class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                 type="text" placeholder="Product Code" name="kode">
-                                @error('kode')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror
                         </div>
 
                         <div>
                             <input
                                 class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                 type="text" placeholder="Product Name" name="nama">
-                                @error('nama')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror
                         </div>
                     </div>
 
@@ -84,21 +78,15 @@
 
                                 <div class="grid lg:grid-cols-2 gap-6">
                                     <div>
-                                        <input name="hb" onkeyup="formatInput(this)"
+                                        <input name="hb"
                                             class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                             type="text" placeholder="Cost Price">
-                                            @error('idsatuan')
-                                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                            @enderror
                                     </div>
                                     <div>
 
-                                        <input name="hj" onkeyup="formatInput(this)"
+                                        <input name="hj"
                                             class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                             type="text" placeholder="Selling Price">
-                                            @error('idsatuan')
-                                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                            @enderror
                                     </div>
                                 </div>
                             </div>
@@ -108,9 +96,6 @@
                                     <input name="sawal"
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                         type="number" placeholder="Quantity in Stock">
-                                        @error('')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                        @enderror
                                 </div>
 
                                 <div>

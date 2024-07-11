@@ -16,8 +16,9 @@ class checkoutController extends Controller
     }
     public function prosescheckout(Request $request)
     {
+        $user = Auth::user();
 
-        $nobukti = 'J' . now()->format('YmdHis') . rand(1000, 9999);
+        $nobukti = 'J'. $user->id . now()->format('YmdHis');
 
 
         $request->validate([
@@ -26,7 +27,6 @@ class checkoutController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $user = Auth::user();
 
             DB::table('tbpelanggan')->insert([
                 'code' => $nobukti,

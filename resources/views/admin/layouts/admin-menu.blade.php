@@ -98,10 +98,10 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="{{ url('admin/category/create') }}"
+              <a href="{{ url('/admin/pembelian') }}"
                 class="flex items-center gap-x-3.5 rounded-full px-5 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
-                Order Details
+                Pembelian
               </a>
             </li>
           </ul>

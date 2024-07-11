@@ -8,6 +8,7 @@ use App\Http\Controllers\barangController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\ordercontroller;
+use App\Http\Controllers\pembelianController;
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'authenticate']);
@@ -26,6 +27,7 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
             ->with('totalProducts', $totalProducts);
     });
 
+
     Route::resource('product', barangController::class);
 
     Route::patch('/update-status/{id}', [barangController::class, 'updateStatus'])->name('updateStatus');
@@ -35,6 +37,11 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
     Route::resource('order', ordercontroller::class);
 
     Route::post('/updateOrderStatus/{nobukti}/{action}', [ordercontroller::class, 'updateOrderStatus'])->name('update.order.status');
+
+    Route::resource('pembelian', pembelianController::class);
+
+    Route::get('/resetnobukti', [pembelianController::class, 'resetNobukti']);
+
 });
 
 Route::get('/error', function () {

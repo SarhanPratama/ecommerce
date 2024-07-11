@@ -10,13 +10,14 @@ class ordercontroller extends Controller
 {
 
     public function getDataJual() {
-       $dataJual = DB::table('tbjual')
-       ->leftJoin('tbpelanggan', 'tbpelanggan.code', '=', 'tbjual.nobukti')
-       ->leftJoin('tbmutasi', 'tbmutasi.nobukti', '=', 'tbjual.nobukti')
-       ->select('tbjual.*', 'tbpelanggan.*', 'tbmutasi.qty as qty', 'tbmutasi.status as status')
-       ->get();
+        $dataJual = DB::table('tbjual')
+        ->leftJoin('tbmutasi', 'tbmutasi.nobukti', '=', 'tbjual.nobukti')
+        ->leftJoin('tbpelanggan', 'tbpelanggan.code', '=', 'tbjual.nobukti')
+        ->select('tbjual.nobukti', 'tbjual.tgl', 'tbjual.keterangan', 'tbjual.total', 'tbjual.foto', 'tbpelanggan.name as name', 'tbmutasi.status as status')
+        ->groupBy('tbjual.nobukti', 'tbjual.tgl', 'tbjual.keterangan', 'tbjual.total', 'tbjual.foto', 'tbpelanggan.name', 'tbmutasi.status')
+        ->get();
 
-        // DD($dataJual);w
+        // DD($dataJual);
        return $dataJual;
     }
 
