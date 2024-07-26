@@ -15,18 +15,26 @@ class AuthController extends Controller
         return view('Auth.login');
     }
 
+    // use HasRole;
     public function authenticate(Request $r)
     {
-
         $request = $r->only('email', 'password');
         if (Auth::attempt($request)) {
-            return redirect('');
+            $user = Auth::user();
+            // return redirect('');
+            if ($user->role == 'admin') {
+                return redirect('admin/dashboard');
+            }
+
+            return redirect()->route('root');
         } else {
             return redirect()->back()->withErrors([
                 'email' => 'Email dan Password tidak cocok',
             ]);
         }
     }
+
+
     public function logout()
     {
 
@@ -35,10 +43,6 @@ class AuthController extends Controller
 
         return redirect('login');
     }
-
-
-
-
 
     public function viewRegister()
     {

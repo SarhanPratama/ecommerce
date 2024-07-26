@@ -21,7 +21,6 @@ class cartComposer
 
             $totalHarga = 0;
             foreach ($cartItems as $value) {
-                
                 $totalHarga += $value->harga;
             }
 

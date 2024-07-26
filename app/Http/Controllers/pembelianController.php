@@ -37,14 +37,6 @@ class pembelianController extends Controller
         // DB::table('');
         $user = Auth::user();
         $nobukti = $request->session()->get('nobukti');
-        // $nobukti = 'B'. $user->id . now()->format('YmdHis');
-
-        // if (!session()->has('nobukti')) {
-        //     $nobukti = 'B'. $user->id . now()->format('YmdHis');
-        //     session(['nobukti' => $nobukti]);
-        // } else {
-        //     $nobukti = session('nobukti');
-        // }
 
         if (!$nobukti) {
             $nobukti = 'B'. $user->id . now()->format('YmdHis');
@@ -57,12 +49,11 @@ class pembelianController extends Controller
         ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbbeli.idbarang')
         ->select('tbbeli.nobukti', 'tbbeli.tgl', 'tbbeli.ket', 'tbbeli.created_at',
         // 'tbmutasi.harga as harga',
-
         'pemasok.nama as namapemasok', 'tbbarang.nama as namabarang', 'tbbarang.foto as foto')
-
         ->groupBy('tbbeli.nobukti', 'tbbeli.tgl',  'tbbeli.created_at', 'tbbeli.ket',
         // 'tbmutasi.harga',
         'pemasok.nama', 'tbbarang.foto', 'tbbarang.nama')
+        ->where('nobukti', $nobukti)
         ->get();
 
         $dataBarang = DB::table('tbbarang')
@@ -71,7 +62,7 @@ class pembelianController extends Controller
             $dataPemasok = DB::table('pemasok')
             ->get();
 
-// dd($dataBarang);
+        // dd($dataBarang);
         return view('pembelian.form-pembelian')
         ->with('nobukti', $nobukti)
         ->with('dataBeli', $dataBeli)

@@ -42,6 +42,7 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
 
     Route::get('/resetnobukti', [pembelianController::class, 'resetNobukti']);
 
+    // Route::get('/search', [barangController::class, 'search'])->name('search');
 });
 
 Route::get('/error', function () {

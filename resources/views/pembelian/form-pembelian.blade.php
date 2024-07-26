@@ -4,38 +4,28 @@
 
 <div class="p-6 space-y-6">
 
-    @include('layouts.shared/admin-page-title', ['subtitle' => 'Orders', 'title' => 'Orders List'])
+    @include('layouts.shared/admin-page-title', ['subtitle' => 'Orders', 'title' => 'Orders Form'])
 
     <div class="">
-        <div>
-
-            <h1 class="text-center">Form Input Pembelian</h1>
-        </div>
         <div class="p-5 border-t border-dashed border-default-200">
-            <form method="POST" action="{{ url('admin/pembelian') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('admin/pembelian') }}" enctype="multipart/form-data" class="flex justify-around gap-6">
                 @csrf
-                <div class="grid lg:grid-cols-3 gap-6">
+                {{-- <div class=""> --}}
 
-                    <div class="">
-
-                        <div class=" mb-6">
+                    <div class="w-1/2 ">
+                        <div class="flex justify-between gap-6">
+                        <div class=" mb-6 w-1/2">
                             <input
                                 class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                 type="text" value="{{ $nobukti }}" placeholder="No Bukti" name="nobukti">
-                                {{-- @error('kode') --}}
-                                {{-- <p class="text-red-500 text-xs mt-1">{{ $message }}</p> --}}
-                                {{-- @enderror --}}
                         </div>
 
-                        <div class="mb-6">
+                        <div class="mb-6 w-1/2">
                             <input
                                 class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                 type="date" name="tgl">
-                                {{-- @error('nama')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror --}}
                         </div>
-
+                        </div>
                         <div class="mb-6">
                             <select name="idpemasok" id="all-select-categories" data-hs-select='{
                             "placeholder": "Select Type",
@@ -48,25 +38,25 @@
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
-
                         </div>
 
-
-                        <div >
+                        <div>
                             <input
                                 class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                 type="text" placeholder="Keterangan" name="ket">
-                                {{-- @error('nama')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror --}}
                         </div>
                     </div>
 
-                    <div class="lg:col-span-2">
-                        <div class="grid lg:grid-cols-2 gap-6 mb-6">
-                            <div class="space-y-6">
 
-                                <div>
+                    <div class="flex justify-center flex-wrap items-end gap-4">
+                        <button
+                            class="py-2.5 px-4 inline-flex rounded-lg text-sm font-medium bg-primary text-white transition-all hover:bg-primary-500">Save</button>
+                    </div>
+
+                        <div class="w-1/2">
+
+
+                                <div class="mb-6">
                                     <select name="idbarang" id="idbarang" data-hs-select='{
                                         "placeholder": "Select Type",
                                         "toggleTag": "<button type=\"button\"></button>",
@@ -85,32 +75,17 @@
                                     <input id="" name="qty"
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                         type="number" placeholder="Quantity in Stock">
-                                        {{-- @error('')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                        @enderror --}}
                                 </div>
 
-                                <div>
+                                <div class="mt-6">
                                     {{-- <input name="harga" id="hargaJual"
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                         type="text" placeholder="Harga" readonly> --}}
                                         <input name="harga" type="text" id="harga" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" placeholder="Harga Jual" readonly>
-                                        {{-- @error('')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                        @enderror --}}
                                 </div>
-                                <div class="lg:col-span-3">
-                                    <div class="flex flex-wrap justify-end items-center gap-4">
-                                        <div class="flex flex-wrap items-center gap-4">
-                                            <button
-                                                class="py-2.5 px-4 inline-flex rounded-lg text-sm font-medium bg-primary text-white transition-all hover:bg-primary-500">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
+
+                {{-- </div> --}}
             </form>
         </div>
     </div>

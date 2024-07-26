@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class kategoriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $title = 'kategori';
@@ -22,12 +20,9 @@ class kategoriController extends Controller
         return view('admin.category.list')
             ->with('kategori', $kategori)
             ->with('title', $title);
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $title = 'Kategori';
@@ -36,9 +31,6 @@ class kategoriController extends Controller
             ->with('title', $title);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(request $r)
     {
         $x = [
@@ -47,27 +39,20 @@ class kategoriController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
-        // Cek apakah file foto diunggah
         if ($r->hasFile('foto')) {
-            // Validasi file foto
             $r->validate([
                 'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            // Ambil file foto yang diunggah
             $foto = $r->file('foto');
-
-            // Tentukan nama unik untuk file foto
             $namaFoto = time().'.'.$foto->getClientOriginalExtension();
-
-            // Pindahkan file foto ke direktori penyimpanan
             $foto->storeAs('public/kategori', $namaFoto);
             $x['foto'] = $namaFoto;
         }
 
         DB::table('tbkategori')->insert([
             'nama' => $r->nama,
-            'foto' => $x['foto'], // Simpan nama gambar ke dalam kolom gambar
+            'foto' => $x['foto'],
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -123,7 +108,7 @@ class kategoriController extends Controller
             ->update([
                 'nama' => $r->nama,
                 'foto' => isset($x['foto']) ? $x['foto'] : null, // Simpan nama gambar ke dalam kolom gambar jika ada
-                'updated_at' => now(),
+                'updated_at' => Carbon::now(),
             ]);
 
         // Tampilkan pesan sukses dan redirect ke halaman index

@@ -46,7 +46,6 @@
 
                     @foreach ($kategori as $item)
 
-
                     <div class="swiper-slide">
                         <div class="group border border-default-200 rounded-xl py-2 transition-all duration-500 overflow-hidden hover:border-primary">
                             <a href="{{ url('kategori/'. $item->id) }}" class="flex items-center justify-center py-4 gap-10 transition-all duration-500">
@@ -87,13 +86,14 @@
                         <div class="absolute top-0 end-0">
                             <span class="inline-flex items-center gap-1.5 py-1 px-4 rounded-lg text-sm font-medium bg-red-500/10 text-red-500">Hot</span>
                         </div>
-                        @if ($item->foto)
+
                         @php
                         $gambarPaths = explode(',', $item->foto);
+                        // dd($gambarPaths);
                         $gambar = $gambarPaths[0];
                         @endphp
                         <img src="{{ asset('storage/' . $gambar) }}" alt="Foto Barang">
-                        @endif
+
                     </div>
                 </div>
 

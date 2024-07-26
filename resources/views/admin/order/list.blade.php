@@ -84,9 +84,9 @@
                         <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-40">Bukti Bayar</th>
                         <!-- <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Payment</th> -->
                         <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Status</th>
-                        <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Amount</th>
+                        {{-- <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Amount</th> --}}
                         <th scope="col" class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">Action</th>
-                        <th scope="col" class="px-3 py-3 text-center text-base capitalize font-semibold text-default-900 min-w-32">Action</th>
+
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-dashed divide-default-200">
@@ -107,7 +107,7 @@
                         </td>
                         <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
                             <span class="h-10 w-10 inline-flex items-center justify-center rounded-full cursor-pointer" onclick="openModal('{{ asset('storage/' . str_replace('public/', '', $item->foto)) }}')">
-                                <img src="wa" alt="Foto Barang" class="object-cover h-10 w-10 rounded-full">
+                                <img src="" alt="Foto Barang" class="object-cover h-10 w-10 rounded-full">==
                             </span>
 
                         </td>

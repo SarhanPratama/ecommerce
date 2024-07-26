@@ -841,7 +841,7 @@
           <a class="inline-flex items-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-default-700 hover:text-primary lg:text-base"
           href="{{ url('/') }}"> Home </a>
           <a class="inline-flex items-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-default-700 hover:text-primary lg:text-base"
-          href="#"> Product </a>
+          href="{{ url('') }}"> Product </a>
           <a class="inline-flex items-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-default-700 hover:text-primary lg:text-base"
           href="{{ url('/contact') }}"> Contact </a>
         </li>
@@ -934,7 +934,7 @@
 </header>
 
 <!-- Navbar -->
-{{-- <div class="mt-16">
+<div class="mt-16">
   <div class="hidden h-16 items-center border-b border-default-100 bg-white dark:bg-default-50 lg:flex">
     <div class="container">
       <div class="flex items-center gap-4 whitespace-nowrap">
@@ -1041,7 +1041,7 @@
       </div>
     </div>
   </div>
-</div> --}}
+</div>
 
 <!-- Mobile Sidebar Menu -->
 <div id="mobile-menu"

@@ -16,13 +16,6 @@ class userController extends Controller
 
         $barang = $barangController->getBarang();
 
-        // $barang = DB::table('tbbarang')
-        //     ->leftjoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
-        //     ->select('tbbarang.*', 'tbkategori.nama as kategori')
-        //     ->get();
-        // dd($this->barang);
-        // $barang = $this->getBarang();
-
         $kategori = DB::table('tbkategori')->get();
 
         return view('user/home/home-one')
@@ -64,23 +57,22 @@ class userController extends Controller
         $idpelanggan = auth()->user()->id;
         $barang = DB::table('tbbarang')->where('id', $id)->first();
 
-        $existingCart = DB::table('tbkeranjang')
+        $cekkeranjang = DB::table('tbkeranjang')
             ->leftJoin('tbbarang', 'tbbarang.id', '=', 'tbkeranjang.idbarang')
             ->select('tbkeranjang.*', 'tbbarang.hj as hargajual')
             ->where('tbkeranjang.idpelanggan', $idpelanggan)
             ->where('tbkeranjang.idbarang', $id)
             ->first();
 
-        if ($existingCart) {
-            // Update qty dan harga total
+        if ($cekkeranjang) {
             DB::table('tbkeranjang')
-                ->where('id', $existingCart->id)
+                ->where('id', $cekkeranjang->id)
                 ->update([
-                    'qty' => $existingCart->qty + $quantity,
-                    'harga' => ($existingCart->qty + $quantity) * $barang->hj,
+                    'qty' => $cekkeranjang->qty + $quantity,
+                    'harga' => ($cekkeranjang->qty + $quantity) * $barang->hj,
                 ]);
         } else {
-            // Insert item baru ke keranjang
+
             DB::table('tbkeranjang')->insert([
                 'idpelanggan' => $idpelanggan,
                 'idbarang' => $id,
@@ -94,7 +86,7 @@ class userController extends Controller
     }
 
 
-    public function kategori(int $id)
+    public function kategori( $id)
     {
         $kategori = DB::table('tbkategori')
             ->leftJoin('tbbarang', 'tbkategori.id', '=', 'tbbarang.idkategori')

@@ -93,7 +93,7 @@
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                         type="number" placeholder="Quantity in Stock">
                                 </div>
-                                <div>
+                                {{-- <div>
                                     <select name="status" id="all-select-categories" data-hs-select='{
                                         "placeholder": "Select Type",
                                         "toggleTag": "<button type=\"button\"></button>",
@@ -105,9 +105,8 @@
                                         <option value="0" {{ $barang->status == 0 ? 'selected' : '' }}>Pending</option>
 
                                     </select>
-                                </div>
+                                </div> --}}
                                 <div>
-
                                     <textarea name="desc"
                                         class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50"
                                         rows="5" placeholder="Short Description">{{ $barang->desc }}</textarea>

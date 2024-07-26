@@ -175,7 +175,7 @@
                         </td>
                         {{-- <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">{{ $item->satuan->nama}}
                         </td> --}}
-                        <td class="px-6 py-3 text-primary font-medium whitespace-nowrap">
+                        {{-- <td class="px-6 py-3 text-primary font-medium whitespace-nowrap">
                             @if($item->status == 1)
                             <span class="px-3 py-1 text-xs font-medium rounded-md bg-primary/20 text-primary">
                                 Publish
@@ -185,7 +185,7 @@
                                 Pending
                             </span>
                             @endif
-                        </td>
+                        </td> --}}
                         <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                             <div class="flex items-center justify-center gap-2">
                                 <a type="button" href="{{ url('admin/product/'.$item->id) }}"
