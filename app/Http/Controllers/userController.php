@@ -12,6 +12,11 @@ class userController extends Controller
 {
     public function index()
     {
+
+        DB::listen(function($query) {
+            var_dump($query->sql);
+        });
+
         $barangController = new barangController();
 
         $barang = $barangController->getBarang();

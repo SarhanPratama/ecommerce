@@ -14,10 +14,13 @@ class barangController extends Controller
 
     public function getBarang()
     {
+
         $barang = DB::table('tbbarang')
             ->leftjoin('tbkategori', 'tbkategori.id', '=', 'tbbarang.idkategori')
             ->select('tbbarang.*', 'tbkategori.nama as kategori')
             ->get();
+
+
 
         return $barang;
     }
